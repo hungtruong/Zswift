@@ -12,6 +12,7 @@
 		19D560A7223D6D8600535544 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19D560A5223D6D8600535544 /* Main.storyboard */; };
 		19D560A9223D6D8800535544 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19D560A8223D6D8800535544 /* Assets.xcassets */; };
 		19D560AC223D6D8800535544 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19D560AA223D6D8800535544 /* LaunchScreen.storyboard */; };
+		19D560B5223D779600535544 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19D560B4223D779600535544 /* CoreBluetooth.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		19D560A8223D6D8800535544 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		19D560AB223D6D8800535544 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		19D560AD223D6D8800535544 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		19D560B4223D779600535544 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +31,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19D560B5223D779600535544 /* CoreBluetooth.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +43,7 @@
 			children = (
 				19D560A0223D6D8600535544 /* Zswift */,
 				19D5609F223D6D8600535544 /* Products */,
+				19D560B3223D779500535544 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -62,6 +66,14 @@
 				19D560AD223D6D8800535544 /* Info.plist */,
 			);
 			path = Zswift;
+			sourceTree = "<group>";
+		};
+		19D560B3223D779500535544 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				19D560B4223D779600535544 /* CoreBluetooth.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
