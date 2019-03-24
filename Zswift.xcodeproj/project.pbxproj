@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		190790F72247287700A48980 /* PM5BluetoothService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190790F62247287700A48980 /* PM5BluetoothService.swift */; };
 		19D560A2223D6D8600535544 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D560A1223D6D8600535544 /* AppDelegate.swift */; };
 		19D560A4223D6D8600535544 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D560A3223D6D8600535544 /* ViewController.swift */; };
 		19D560A7223D6D8600535544 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19D560A5223D6D8600535544 /* Main.storyboard */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		190790F62247287700A48980 /* PM5BluetoothService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PM5BluetoothService.swift; sourceTree = "<group>"; };
 		19D5609E223D6D8600535544 /* Zswift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Zswift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19D560A1223D6D8600535544 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		19D560A3223D6D8600535544 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -60,6 +62,7 @@
 			children = (
 				19D560A1223D6D8600535544 /* AppDelegate.swift */,
 				19D560A3223D6D8600535544 /* ViewController.swift */,
+				190790F62247287700A48980 /* PM5BluetoothService.swift */,
 				19D560A5223D6D8600535544 /* Main.storyboard */,
 				19D560A8223D6D8800535544 /* Assets.xcassets */,
 				19D560AA223D6D8800535544 /* LaunchScreen.storyboard */,
@@ -147,6 +150,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				190790F72247287700A48980 /* PM5BluetoothService.swift in Sources */,
 				19D560A4223D6D8600535544 /* ViewController.swift in Sources */,
 				19D560A2223D6D8600535544 /* AppDelegate.swift in Sources */,
 			);
