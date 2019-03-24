@@ -11,6 +11,8 @@ class PM5BluetoothService: NSObject, CBCentralManagerDelegate, CBPeripheralDeleg
     var calories: Int = 0
     var cadence: Int = 0
     
+    let service = CBUUID(string: "CE060030-43E5-11E4-916C-0800200C9A66")
+    
     let characteristic31 = CBUUID(string: "CE060031-43E5-11E4-916C-0800200C9A66")
     let characteristic32 = CBUUID(string: "CE060032-43E5-11E4-916C-0800200C9A66")
     let characteristic33 = CBUUID(string: "CE060033-43E5-11E4-916C-0800200C9A66")
@@ -78,7 +80,11 @@ class PM5BluetoothService: NSObject, CBCentralManagerDelegate, CBPeripheralDeleg
         print("discovered services")
         print(peripheral.services ?? "")
         if let services = peripheral.services {
-            services.forEach { peripheral.discoverCharacteristics(nil, for: $0) }
+            services.forEach {
+                if $0.uuid == service {
+                    peripheral.discoverCharacteristics(nil, for: $0)
+                }
+            }
         }
     }
     
