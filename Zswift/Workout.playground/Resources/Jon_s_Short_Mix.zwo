@@ -1,0 +1,47 @@
+<workout_file>
+    <author>J.Mayfield</author>
+    <name>Jon's Short Mix</name>
+    <description>If you want to get a solid effort done in 30 minutes or less, this is a fun one to do.  A little something for the sprinters, and a SST block to build a little FTP, all wrapped up in a tasty 30 minute session. </description>
+    <sportType>bike</sportType>
+    <tags>
+        <tag name="INTERVALS"/>
+        <tag name="FTP"/>
+    </tags>
+    <workout>
+        <Warmup Duration="300" PowerLow="0.30000001" PowerHigh="0.69999999" pace="0">
+            <textevent timeoffset="15" message="Welcome to Jons Short Mix" duration="5"/>
+            <textevent timeoffset="20" message="This workout covers the spectrum"/>
+            <textevent timeoffset="20" message="from improving your breakaway to building FTP" y="270"/>
+            <textevent timeoffset="285" message="Intervals Incoming! "/>
+        </Warmup>
+        <IntervalsT Repeat="2" OnDuration="60.000004" OffDuration="30.000002" OnPower="1.5044999" OffPower="0.64449996" pace="0">
+            <textevent timeoffset="155" message="That last effort may help you"/>
+            <textevent timeoffset="155" message="close the gap one day." y="270"/>
+        </IntervalsT>
+        <SteadyState Duration="120.00001" Power="0.75" pace="0">
+            <textevent timeoffset="105" message="Keep your cadence up for this next part!"/>
+        </SteadyState>
+        <SteadyState Duration="10" Power="3" pace="0"/>
+        <SteadyState Duration="60.000004" Power="0.75" pace="0"/>
+        <SteadyState Duration="10" Power="3" pace="0"/>
+        <SteadyState Duration="60.000004" Power="0.75" pace="0"/>
+        <SteadyState Duration="10" Power="3" pace="0"/>
+        <SteadyState Duration="240.00002" Power="0.60000002" pace="0">
+            <textevent timeoffset="5" message="The attacks are over."/>
+            <textevent timeoffset="15" message="Time for a bit of recovery."/>
+            <textevent timeoffset="90" message="While we&apos;re here, try 2 minutes"/>
+            <textevent timeoffset="90" message="at 110 rpms. Spin it out." y="270"/>
+            <textevent timeoffset="210" message="Time to get back to 90-100rpm"/>
+            <textevent timeoffset="210" message="and select your typical gearing" y="270"/>
+            <textevent timeoffset="210" message="for this next big block." y="300"/>
+        </SteadyState>
+        <SteadyState Duration="600" Power="0.89449996" pace="0">
+            <textevent timeoffset="15" message="Time to settle in for some sweet spot work."/>
+            <textevent timeoffset="25" message="Sweet spot efforts are great at building FTP."/>
+            <textevent timeoffset="300" message="Zwift Fact: this was the workout the" y="220" textscale="0.5"/>
+            <textevent timeoffset="300" message="dev team used to test workout mode" textscale="0.5"/>
+            <textevent timeoffset="300" message="during its development." y="260" textscale="0.5"/>
+        </SteadyState>
+        <Cooldown Duration="180.00002" PowerLow="0.69999999" PowerHigh="0.30000001" pace="0"/>
+    </workout>
+</workout_file>

@@ -1,0 +1,107 @@
+<workout_file>
+    <author>E.Mullen</author>
+    <name>Emily's Short Mix</name>
+    <description>You've got 30min to spare and you wanna make it count.  </description>
+    <sportType>bike</sportType>
+    <tags/>
+    <workout>
+        <Warmup Duration="180.00002" PowerLow="0.44999996" PowerHigh="0.85000002" pace="2">
+            <textevent timeoffset="0" message="Welcome to Emily&apos;s Short Mix!"/>
+            <textevent timeoffset="10" message="This workout was designed to give you a great workout in 30min. "/>
+            <textevent timeoffset="20" message="Turn up the volume on your favorite tunes and get ready for fun."/>
+            <textevent timeoffset="30" message="You will sweat in this effort. But it&apos;s a short workout.  "/>
+            <textevent timeoffset="60" message="Short warm up here.  No time to waste. "/>
+            <textevent timeoffset="120" message="Keep on building and start to increase the RPM. "/>
+            <textevent timeoffset="165" message="Let&apos;s start the main set.  You&apos;re ready."/>
+        </Warmup>
+        <SteadyState Duration="180.00002" Power="0.85000002" pace="2">
+            <textevent timeoffset="10" message="In this first block you should feel like you&apos;re cruisin&apos; "/>
+            <textevent timeoffset="20" message="Nothing too hard.  Nothing too easy. "/>
+            <textevent timeoffset="30" message="We&apos;re going to make each minute count today. "/>
+            <textevent timeoffset="90" message="Just find a nice rhythm. "/>
+            <textevent timeoffset="100" message="Remember you can always increase or decrease the intensity  "/>
+            <textevent timeoffset="110" message="Just hit the arrow keys on your keyboard or on the Zwift Companion app. "/>
+            <textevent timeoffset="160" message="Off to a great start! "/>
+        </SteadyState>
+        <SteadyState Duration="60.000004" Power="1" pace="2">
+            <textevent timeoffset="0" message="Time to start the work "/>
+            <textevent timeoffset="60" message="Halfway thru this block already! "/>
+            <textevent timeoffset="100" message="Keep it strong and steady! "/>
+        </SteadyState>
+        <SteadyState Duration="60.000004" Power="1.15" pace="2">
+            <textevent timeoffset="0" message="One strong minute.  Let&apos;s go. "/>
+            <textevent timeoffset="15" message="Keep your cadence high. "/>
+            <textevent timeoffset="30" message="30 seconds.  Keep it up. "/>
+            <textevent timeoffset="50" message="10 seconds!  Push thru! "/>
+        </SteadyState>
+        <SteadyState Duration="90.000008" Power="0.75" pace="2">
+            <textevent timeoffset="10" message="First block done.  Killed it. "/>
+            <textevent timeoffset="30" message="Grab some water. Sip sip!  "/>
+            <textevent timeoffset="55" message="Time to start block #2.  You&apos;re ready. "/>
+        </SteadyState>
+        <SteadyState Duration="180.00002" Power="0.85000002" pace="2">
+            <textevent timeoffset="10" message="Here we go.  Still just cruisin&apos; "/>
+            <textevent timeoffset="30" message="Find a strong and steady pace. "/>
+            <textevent timeoffset="50" message="Deep breath.  Shake off that first set. "/>
+            <textevent timeoffset="100" message="Nice job."/>
+            <textevent timeoffset="165" message="We&apos;re getting ready to work again. "/>
+        </SteadyState>
+        <SteadyState Duration="120.00001" Power="1" pace="2">
+            <textevent timeoffset="15" message="Looking good.  Staying strong. "/>
+            <textevent timeoffset="60" message="Halfway already.  Feeling stronger than last time. "/>
+        </SteadyState>
+        <SteadyState Duration="120.00001" Power="1.15" pace="2">
+            <textevent timeoffset="0" message="2 min.  120 seconds.  That&apos;s it. "/>
+            <textevent timeoffset="30" message="Dig deep for it. "/>
+            <textevent timeoffset="60" message="Halfway.  You&apos;ve got this. "/>
+            <textevent timeoffset="90" message="Looking great! 30 seconds left! "/>
+            <textevent timeoffset="110" message="10 more seconds. "/>
+        </SteadyState>
+        <SteadyState Duration="90.000008" Power="0.75" pace="2">
+            <textevent timeoffset="10" message="Whew!  Catch your breath. "/>
+            <textevent timeoffset="30" message="Enjoy this recovery. "/>
+            <textevent timeoffset="70" message="Take a few deep breaths here. "/>
+        </SteadyState>
+        <SteadyState Duration="180.00002" Power="0.85000002" pace="2">
+            <textevent timeoffset="0" message="Last block is the best block. "/>
+            <textevent timeoffset="30" message="Smile!  Makes it easier. "/>
+            <textevent timeoffset="90" message="You&apos;re doing great!"/>
+            <textevent timeoffset="110" message="In the last two blocks, keep your cadence up "/>
+            <textevent timeoffset="115" message="It&apos;ll make everything easier "/>
+            <textevent timeoffset="150" message="30 seconds left at this pace! "/>
+            <textevent timeoffset="160" message="Are you ready? "/>
+            <textevent timeoffset="170" message="Increase that cadence. "/>
+            <textevent timeoffset="175" message="Time to go. "/>
+        </SteadyState>
+        <SteadyState Duration="180.00002" Power="1" pace="2">
+            <textevent timeoffset="10" message="3 minutes here.  Home stretch is near. "/>
+            <textevent timeoffset="60" message="Making every minute count. "/>
+            <textevent timeoffset="120" message="Keep your cadence up.  Don&apos;t let it slow! "/>
+            <textevent timeoffset="160" message="Final 3 minutes of work ahead. "/>
+            <textevent timeoffset="170" message="YES. YOU. CAN.   "/>
+            <textevent timeoffset="175" message="Let&apos;s finish this out. "/>
+        </SteadyState>
+        <SteadyState Duration="180.00002" Power="1.15" pace="2">
+            <textevent timeoffset="5" message="Final 3 minutes. "/>
+            <textevent timeoffset="15" message="High cadence. "/>
+            <textevent timeoffset="45" message="Go go go! "/>
+            <textevent timeoffset="75" message="Don&apos;t drop your effort. "/>
+            <textevent timeoffset="90" message="Halfway. "/>
+            <textevent timeoffset="110" message="Final minute ahead! "/>
+            <textevent timeoffset="120" message="Anything and everything you&apos;ve got. "/>
+            <textevent timeoffset="160" message="20 seconds left "/>
+            <textevent timeoffset="170" message="10 "/>
+        </SteadyState>
+        <Cooldown Duration="180.00002" PowerLow="0.75" PowerHigh="0.39999998" pace="2">
+            <textevent timeoffset="3" message="You did it! "/>
+            <textevent timeoffset="8" message="We&apos;ll slow it down quickly here. "/>
+            <textevent timeoffset="30" message="Great job today. "/>
+            <textevent timeoffset="45" message="Those 30 minutes went fast! "/>
+            <textevent timeoffset="60" message="And hopefully you had fun. "/>
+            <textevent timeoffset="90" message="Give a fellow rider a Ride On! "/>
+            <textevent timeoffset="110" message="One final minute to spin things out. "/>
+            <textevent timeoffset="150" message="Have a wonderful rest of your day. "/>
+            <textevent timeoffset="160" message="Ride On! "/>
+        </Cooldown>
+    </workout>
+</workout_file>

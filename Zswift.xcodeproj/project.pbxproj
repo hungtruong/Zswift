@@ -8,24 +8,36 @@
 
 /* Begin PBXBuildFile section */
 		190790F72247287700A48980 /* PM5BluetoothService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190790F62247287700A48980 /* PM5BluetoothService.swift */; };
+		195D95CD2258811000176DB2 /* ZWOParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195D95CC2258811000176DB2 /* ZWOParser.swift */; };
+		195D95DF225939C100176DB2 /* Workouts in Resources */ = {isa = PBXBuildFile; fileRef = 195D95DE225939C100176DB2 /* Workouts */; };
+		195D95E122593AB900176DB2 /* WorkoutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195D95E022593AB900176DB2 /* WorkoutManager.swift */; };
+		195D95E322593FEF00176DB2 /* WorkoutSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195D95E222593FEF00176DB2 /* WorkoutSelectionViewController.swift */; };
+		195D95E5225941AF00176DB2 /* WorkoutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195D95E4225941AF00176DB2 /* WorkoutTableViewCell.swift */; };
 		19D560A2223D6D8600535544 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D560A1223D6D8600535544 /* AppDelegate.swift */; };
-		19D560A4223D6D8600535544 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D560A3223D6D8600535544 /* ViewController.swift */; };
+		19D560A4223D6D8600535544 /* WorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D560A3223D6D8600535544 /* WorkoutViewController.swift */; };
 		19D560A7223D6D8600535544 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19D560A5223D6D8600535544 /* Main.storyboard */; };
 		19D560A9223D6D8800535544 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19D560A8223D6D8800535544 /* Assets.xcassets */; };
 		19D560AC223D6D8800535544 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19D560AA223D6D8800535544 /* LaunchScreen.storyboard */; };
 		19D560B5223D779600535544 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19D560B4223D779600535544 /* CoreBluetooth.framework */; };
+		19FD51502249CDB6001BE0B2 /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FD514F2249CDB6001BE0B2 /* Workout.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		190790F62247287700A48980 /* PM5BluetoothService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PM5BluetoothService.swift; sourceTree = "<group>"; };
+		195D95CC2258811000176DB2 /* ZWOParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZWOParser.swift; sourceTree = "<group>"; };
+		195D95DE225939C100176DB2 /* Workouts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Workouts; sourceTree = "<group>"; };
+		195D95E022593AB900176DB2 /* WorkoutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutManager.swift; sourceTree = "<group>"; };
+		195D95E222593FEF00176DB2 /* WorkoutSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutSelectionViewController.swift; sourceTree = "<group>"; };
+		195D95E4225941AF00176DB2 /* WorkoutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutTableViewCell.swift; sourceTree = "<group>"; };
 		19D5609E223D6D8600535544 /* Zswift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Zswift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19D560A1223D6D8600535544 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		19D560A3223D6D8600535544 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		19D560A3223D6D8600535544 /* WorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutViewController.swift; sourceTree = "<group>"; };
 		19D560A6223D6D8600535544 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		19D560A8223D6D8800535544 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		19D560AB223D6D8800535544 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		19D560AD223D6D8800535544 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		19D560B4223D779600535544 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		19FD514F2249CDB6001BE0B2 /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,8 +72,14 @@
 		19D560A0223D6D8600535544 /* Zswift */ = {
 			isa = PBXGroup;
 			children = (
+				195D95DE225939C100176DB2 /* Workouts */,
 				19D560A1223D6D8600535544 /* AppDelegate.swift */,
-				19D560A3223D6D8600535544 /* ViewController.swift */,
+				19D560A3223D6D8600535544 /* WorkoutViewController.swift */,
+				195D95E222593FEF00176DB2 /* WorkoutSelectionViewController.swift */,
+				195D95E4225941AF00176DB2 /* WorkoutTableViewCell.swift */,
+				19FD514F2249CDB6001BE0B2 /* Workout.swift */,
+				195D95CC2258811000176DB2 /* ZWOParser.swift */,
+				195D95E022593AB900176DB2 /* WorkoutManager.swift */,
 				190790F62247287700A48980 /* PM5BluetoothService.swift */,
 				19D560A5223D6D8600535544 /* Main.storyboard */,
 				19D560A8223D6D8800535544 /* Assets.xcassets */,
@@ -111,6 +129,7 @@
 				TargetAttributes = {
 					19D5609D223D6D8600535544 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 					};
 				};
 			};
@@ -139,6 +158,7 @@
 			files = (
 				19D560AC223D6D8800535544 /* LaunchScreen.storyboard in Resources */,
 				19D560A9223D6D8800535544 /* Assets.xcassets in Resources */,
+				195D95DF225939C100176DB2 /* Workouts in Resources */,
 				19D560A7223D6D8600535544 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -151,8 +171,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				190790F72247287700A48980 /* PM5BluetoothService.swift in Sources */,
-				19D560A4223D6D8600535544 /* ViewController.swift in Sources */,
+				195D95CD2258811000176DB2 /* ZWOParser.swift in Sources */,
+				19D560A4223D6D8600535544 /* WorkoutViewController.swift in Sources */,
+				195D95E5225941AF00176DB2 /* WorkoutTableViewCell.swift in Sources */,
+				195D95E322593FEF00176DB2 /* WorkoutSelectionViewController.swift in Sources */,
 				19D560A2223D6D8600535544 /* AppDelegate.swift in Sources */,
+				19FD51502249CDB6001BE0B2 /* Workout.swift in Sources */,
+				195D95E122593AB900176DB2 /* WorkoutManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -307,7 +332,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hung-truong.Zswift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -325,7 +350,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hung-truong.Zswift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

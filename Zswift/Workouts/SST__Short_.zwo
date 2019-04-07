@@ -1,0 +1,23 @@
+<workout_file>
+    <author>FTP Training</author>
+    <name>SST (Shorter)</name>
+    <description>Sweet Spot Training (or SST for short) will give great bang for buck. Training at around 90 percent of your threshhold (aka the Sweet Spot)  is useful because you can spend quite a bit of time there without building up undue amounts of training stress. You can do this workout as much as you'd like and watch your FTP rise over time.</description>
+    <sportType>bike</sportType>
+    <tags/>
+    <workout>
+        <Warmup Duration="300" PowerLow="0.39999998" PowerHigh="0.85000002" pace="8268">
+            <textevent timeoffset="30" message="Welcome to SST (Short)"/>
+            <textevent timeoffset="41" message="SST work is great for improving base fitness."/>
+            <textevent timeoffset="268" message="Ok - 40 minutes of SST coming up"/>
+            <textevent timeoffset="278" message="We&apos;ll vary the pace a bit every 5 minutes"/>
+            <textevent timeoffset="290" message="Aim for a cadence of 90-95rpm"/>
+        </Warmup>
+        <IntervalsT Repeat="2" OnDuration="300" OffDuration="300" OnPower="0.95685714" OffPower="0.8825714" pace="8268" OverUnder="1">
+            <textevent timeoffset="1200" message="Half way done."/>
+            <textevent timeoffset="2095" message="It&apos;s all downhill from here"/>
+            <textevent timeoffset="2340" message="If you find this too easy, try the 2x15 FTP workout"/>
+            <textevent timeoffset="2350" message="Or next time try SST (Med)"/>
+        </IntervalsT>
+        <Cooldown Duration="300" PowerLow="0.75" PowerHigh="0.54999995" pace="8268"/>
+    </workout>
+</workout_file>
