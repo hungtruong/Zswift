@@ -32,7 +32,7 @@ struct Workout {
     }
 }
 
-enum WorkoutSegment {
+enum WorkoutSegment: Equatable {
     case warmup(duration: TimeInterval, powerLow: Double, powerHigh: Double)
     case intervals(reps: Int, onDuration: TimeInterval, offDuration: TimeInterval, onPower: Double,
         offPower: Double)
@@ -53,15 +53,18 @@ enum WorkoutSegment {
     }
     
     func wattage(for ftp: Int, interval: TimeInterval) -> Int {
+        func roundToFive(_ number: Int) -> Int {
+            return (number + 4) / 5 * 5;
+        }
+        
         switch self {
-        case .warmup(duration: let duration, powerLow: let powerLow, powerHigh: let powerHigh):
-            return Int((((interval / duration) * (powerHigh - powerLow)) + powerLow) * Double(ftp))
+        case .warmup(duration: let duration, powerLow: let powerLow, powerHigh: let powerHigh),
+             .cooldown(duration: let duration, powerLow: let powerLow, powerHigh: let powerHigh):
+            return roundToFive(Int((((interval / duration) * (powerHigh - powerLow)) + powerLow) * Double(ftp)))
         case .steady(duration: _, power: let power):
-            return Int(power * Double(ftp))
+            return roundToFive(Int(power * Double(ftp)))
         case .intervals(reps: _, onDuration: _, offDuration: _, onPower: _, offPower: _):
             return 0
-        case .cooldown(duration: let duration, powerLow: let powerLow, powerHigh: let powerHigh):
-            return Int(((((duration - interval) / duration) * (powerHigh - powerLow)) + powerLow) * Double(ftp))
         }
     }
     
@@ -79,6 +82,25 @@ enum WorkoutSegment {
                 segments.append(.steady(duration: offDuration, power: offPower))
             }
             return segments
+        }
+    }
+    
+    func description(ftp: Int?) -> String {
+        var wattageString = ""
+        if let ftp = ftp {
+            let wattage = self.wattage(for: ftp, interval: 0)
+            wattageString = String(wattage)
+        }
+        
+        switch self {
+        case .warmup(duration: _, powerLow: _, powerHigh: _):
+            return "Warmup"
+        case .steady(duration: _, power: _):
+            return "Steady" + String(format: " @%@w", wattageString)
+        case .intervals(reps: _, onDuration: _, offDuration: _, onPower: _, offPower: _):
+            return ""
+        case .cooldown(duration: _, powerLow: _, powerHigh: _):
+            return "Cooldown"
         }
     }
 }
@@ -100,5 +122,10 @@ extension Workout {
                 break
             }
         }
+    }
+    
+    func nextSegment() -> WorkoutSegment? {
+        let index = self.workoutSegments.firstIndex(of: self.currentSegment)! + 1
+        return index < workoutSegments.count ? workoutSegments[index] : nil
     }
 }

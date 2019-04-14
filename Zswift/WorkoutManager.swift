@@ -2,7 +2,6 @@ import Foundation
 
 class WorkoutManager {
     static let shared = WorkoutManager()
-    var ftp: Int = 170
     private(set) var workouts: [Workout] = []
     private init() {
         guard let urls = Bundle.main.urls(forResourcesWithExtension: "zwo", subdirectory: "Workouts") else {

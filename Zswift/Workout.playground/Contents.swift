@@ -209,3 +209,9 @@ parser.parse()
 
 let w = zwoParser.workout()
 print(w)
+
+func roundToFive(_ number: Int) -> Int {
+    return (number + 4) / 5 * 5;
+}
+print(roundToFive(1))
+print(roundToFive(10))
