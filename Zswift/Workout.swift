@@ -12,8 +12,10 @@ struct Workout {
     var timeElapsed: TimeInterval = 0
     var timeRemaining: TimeInterval = 0
     var timeInSegment: TimeInterval = 0
+    var timeLeftInSegment: TimeInterval = 0
     var timeRemainingInSegment: TimeInterval = 0
     
+
     init(name: String, workoutDescription: String, workoutSegments: [WorkoutSegment], ftp: Int,
          currentSegment: WorkoutSegment? = nil) {
         self.name = name
@@ -29,10 +31,19 @@ struct Workout {
         self.totalTime = self.workoutSegments.reduce(0.0, { (total, segment) -> TimeInterval in
             return total + segment.duration
         })
+        
+
     }
 }
 
 enum WorkoutSegment: Equatable {
+    static var dateFormatter = DateComponentsFormatter() {
+        didSet {
+            dateFormatter.zeroFormattingBehavior = [.pad]
+            dateFormatter.allowedUnits = [.minute, .second]
+        }
+    }
+
     case warmup(duration: TimeInterval, powerLow: Double, powerHigh: Double)
     case intervals(reps: Int, onDuration: TimeInterval, offDuration: TimeInterval, onPower: Double,
         offPower: Double)
@@ -42,13 +53,13 @@ enum WorkoutSegment: Equatable {
     var duration: TimeInterval {
         switch self {
         case .warmup(duration: let duration, powerLow: _, powerHigh: _):
-            return duration
+            return duration.rounded()
         case .steady(duration: let duration, power: _):
-            return duration
+            return duration.rounded()
         case .intervals(reps: _, onDuration: _, offDuration: _, onPower: _, offPower: _):
             return 0
         case .cooldown(duration: let duration, powerLow: _, powerHigh: _):
-            return duration
+            return duration.rounded()
         }
     }
     
@@ -96,7 +107,7 @@ enum WorkoutSegment: Equatable {
         case .warmup(duration: _, powerLow: _, powerHigh: _):
             return "Warmup"
         case .steady(duration: _, power: _):
-            return "Steady" + String(format: " @%@w", wattageString)
+            return "Steady" + String(format: " @%@w %@m", wattageString, WorkoutSegment.dateFormatter.string(from: self.duration)!)
         case .intervals(reps: _, onDuration: _, offDuration: _, onPower: _, offPower: _):
             return ""
         case .cooldown(duration: _, powerLow: _, powerHigh: _):

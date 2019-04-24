@@ -1,15 +1,40 @@
 import CoreBluetooth
 
-
+protocol BluetoothServiceDelegate {
+    func wattValueChanged(_ watts: Int)
+    func distanceValueChanged(_ distance: Int)
+    func caloriesChanged(_ calories: Int)
+    func cadenceChanged(_ cadence: Int)
+}
 
 class PM5BluetoothService: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     
     let centralManager = CBCentralManager()
     var connectedPeripherals: [CBPeripheral] = []
-    var wattValue: Int = 0
-    var distance: Int = 0
-    var calories: Int = 0
-    var cadence: Int = 0
+    var wattValue: Int = 0 {
+        didSet {
+            delegate?.wattValueChanged(wattValue)
+        }
+    }
+    
+    var distance: Int = 0 {
+        didSet {
+            delegate?.distanceValueChanged(distance)
+        }
+    }
+    
+    var calories: Int = 0 {
+        didSet {
+            delegate?.caloriesChanged(calories)
+        }
+    }
+    var cadence: Int = 0 {
+        didSet {
+            delegate?.cadenceChanged(cadence)
+        }
+    }
+    
+    var delegate: BluetoothServiceDelegate?
     
     let service = CBUUID(string: "CE060030-43E5-11E4-916C-0800200C9A66")
     
@@ -105,8 +130,8 @@ class PM5BluetoothService: NSObject, CBCentralManagerDelegate, CBPeripheralDeleg
             self.calories = Int((UInt16(array[7]) << 8) | UInt16(array[6]))
             print("calories ", self.calories)
         case characteristic31:
-            self.distance = Int((UInt32(array[5]) << 16 | UInt32(array[4]) << 8 | UInt32(array[3])))
-            print("distance ", self.distance/10)
+            self.distance = Int((UInt32(array[5]) << 16 | UInt32(array[4]) << 8 | UInt32(array[3]))) / 10
+            print("distance ", self.distance)
             print(array)
         case characteristic36:
             self.wattValue = Int((UInt16(array[4]) << 8) | UInt16(array[3]))

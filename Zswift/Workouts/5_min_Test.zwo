@@ -1,0 +1,12 @@
+<workout_file>
+    <author>H.Truong</author>
+    <name>5 min Test</name>
+    <description></description>
+    <sportType>bike</sportType>
+    <tags/>
+    <workout>
+        <Warmup Duration="120" PowerLow="0.2528125" PowerHigh="0.7215625" pace="0"/>
+        <SteadyState Duration="120" Power="0.80906248" pace="0"/>
+        <Cooldown Duration="60" PowerLow="0.7528125" PowerHigh="0.2528125" pace="0"/>
+    </workout>
+</workout_file>

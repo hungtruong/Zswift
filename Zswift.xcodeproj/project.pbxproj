@@ -8,6 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		190790F72247287700A48980 /* PM5BluetoothService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190790F62247287700A48980 /* PM5BluetoothService.swift */; };
+		1932AECF2263EACB0077DD4B /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1932AECD2263EACB0077DD4B /* Interface.storyboard */; };
+		1932AED12263EACE0077DD4B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1932AED02263EACE0077DD4B /* Assets.xcassets */; };
+		1932AED82263EACE0077DD4B /* Zswift Watch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 1932AED72263EACE0077DD4B /* Zswift Watch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		1932AEDD2263EACE0077DD4B /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1932AEDC2263EACE0077DD4B /* InterfaceController.swift */; };
+		1932AEDF2263EACE0077DD4B /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1932AEDE2263EACE0077DD4B /* ExtensionDelegate.swift */; };
+		1932AEE12263EACE0077DD4B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1932AEE02263EACE0077DD4B /* Assets.xcassets */; };
+		1932AEE52263EACE0077DD4B /* Zswift Watch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 1932AECB2263EACB0077DD4B /* Zswift Watch.app */; };
+		1932AEF02263EAEB0077DD4B /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1932AEEF2263EAEB0077DD4B /* HealthKit.framework */; };
+		1932AEF22263F0430077DD4B /* HealthKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1932AEF12263F0430077DD4B /* HealthKit.swift */; };
+		1932AEF52263F4170077DD4B /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1932AEF42263F4170077DD4B /* HealthKit.framework */; };
 		195D95CD2258811000176DB2 /* ZWOParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195D95CC2258811000176DB2 /* ZWOParser.swift */; };
 		195D95DF225939C100176DB2 /* Workouts in Resources */ = {isa = PBXBuildFile; fileRef = 195D95DE225939C100176DB2 /* Workouts */; };
 		195D95E122593AB900176DB2 /* WorkoutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195D95E022593AB900176DB2 /* WorkoutManager.swift */; };
@@ -23,8 +33,64 @@
 		19FD51502249CDB6001BE0B2 /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FD514F2249CDB6001BE0B2 /* Workout.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		1932AED92263EACE0077DD4B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 19D56096223D6D8600535544 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1932AED62263EACE0077DD4B;
+			remoteInfo = "Zswift Watch Extension";
+		};
+		1932AEE32263EACE0077DD4B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 19D56096223D6D8600535544 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1932AECA2263EACB0077DD4B;
+			remoteInfo = "Zswift Watch";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		1932AEEB2263EACF0077DD4B /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				1932AED82263EACE0077DD4B /* Zswift Watch Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1932AEED2263EACF0077DD4B /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				1932AEE52263EACE0077DD4B /* Zswift Watch.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		190790F62247287700A48980 /* PM5BluetoothService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PM5BluetoothService.swift; sourceTree = "<group>"; };
+		1932AECB2263EACB0077DD4B /* Zswift Watch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Zswift Watch.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1932AECE2263EACB0077DD4B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		1932AED02263EACE0077DD4B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1932AED22263EACE0077DD4B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1932AED72263EACE0077DD4B /* Zswift Watch Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Zswift Watch Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1932AEDC2263EACE0077DD4B /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
+		1932AEDE2263EACE0077DD4B /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
+		1932AEE02263EACE0077DD4B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1932AEE22263EACE0077DD4B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1932AEEE2263EAEB0077DD4B /* Zswift Watch Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Zswift Watch Extension.entitlements"; sourceTree = "<group>"; };
+		1932AEEF2263EAEB0077DD4B /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS5.2.sdk/System/Library/Frameworks/HealthKit.framework; sourceTree = DEVELOPER_DIR; };
+		1932AEF12263F0430077DD4B /* HealthKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKit.swift; sourceTree = "<group>"; };
+		1932AEF32263F4170077DD4B /* Zswift.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Zswift.entitlements; sourceTree = "<group>"; };
+		1932AEF42263F4170077DD4B /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		195D95CC2258811000176DB2 /* ZWOParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZWOParser.swift; sourceTree = "<group>"; };
 		195D95DE225939C100176DB2 /* Workouts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Workouts; sourceTree = "<group>"; };
 		195D95E022593AB900176DB2 /* WorkoutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutManager.swift; sourceTree = "<group>"; };
@@ -43,21 +109,54 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		1932AED42263EACE0077DD4B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1932AEF02263EAEB0077DD4B /* HealthKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		19D5609B223D6D8600535544 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				19D560B5223D779600535544 /* CoreBluetooth.framework in Frameworks */,
+				1932AEF52263F4170077DD4B /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1932AECC2263EACB0077DD4B /* Zswift Watch */ = {
+			isa = PBXGroup;
+			children = (
+				1932AECD2263EACB0077DD4B /* Interface.storyboard */,
+				1932AED02263EACE0077DD4B /* Assets.xcassets */,
+				1932AED22263EACE0077DD4B /* Info.plist */,
+			);
+			path = "Zswift Watch";
+			sourceTree = "<group>";
+		};
+		1932AEDB2263EACE0077DD4B /* Zswift Watch Extension */ = {
+			isa = PBXGroup;
+			children = (
+				1932AEEE2263EAEB0077DD4B /* Zswift Watch Extension.entitlements */,
+				1932AEDC2263EACE0077DD4B /* InterfaceController.swift */,
+				1932AEDE2263EACE0077DD4B /* ExtensionDelegate.swift */,
+				1932AEE02263EACE0077DD4B /* Assets.xcassets */,
+				1932AEE22263EACE0077DD4B /* Info.plist */,
+			);
+			path = "Zswift Watch Extension";
+			sourceTree = "<group>";
+		};
 		19D56095223D6D8600535544 = {
 			isa = PBXGroup;
 			children = (
 				19D560A0223D6D8600535544 /* Zswift */,
+				1932AECC2263EACB0077DD4B /* Zswift Watch */,
+				1932AEDB2263EACE0077DD4B /* Zswift Watch Extension */,
 				19D5609F223D6D8600535544 /* Products */,
 				19D560B3223D779500535544 /* Frameworks */,
 			);
@@ -67,6 +166,8 @@
 			isa = PBXGroup;
 			children = (
 				19D5609E223D6D8600535544 /* Zswift.app */,
+				1932AECB2263EACB0077DD4B /* Zswift Watch.app */,
+				1932AED72263EACE0077DD4B /* Zswift Watch Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -74,8 +175,10 @@
 		19D560A0223D6D8600535544 /* Zswift */ = {
 			isa = PBXGroup;
 			children = (
+				1932AEF32263F4170077DD4B /* Zswift.entitlements */,
 				195D95DE225939C100176DB2 /* Workouts */,
 				19D560A1223D6D8600535544 /* AppDelegate.swift */,
+				1932AEF12263F0430077DD4B /* HealthKit.swift */,
 				19D560A3223D6D8600535544 /* WorkoutViewController.swift */,
 				195D95E222593FEF00176DB2 /* WorkoutSelectionViewController.swift */,
 				195D95E4225941AF00176DB2 /* WorkoutTableViewCell.swift */,
@@ -95,6 +198,8 @@
 		19D560B3223D779500535544 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1932AEF42263F4170077DD4B /* HealthKit.framework */,
+				1932AEEF2263EAEB0077DD4B /* HealthKit.framework */,
 				19D560B4223D779600535544 /* CoreBluetooth.framework */,
 			);
 			name = Frameworks;
@@ -103,6 +208,40 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		1932AECA2263EACB0077DD4B /* Zswift Watch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1932AEEC2263EACF0077DD4B /* Build configuration list for PBXNativeTarget "Zswift Watch" */;
+			buildPhases = (
+				1932AEC92263EACB0077DD4B /* Resources */,
+				1932AEEB2263EACF0077DD4B /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1932AEDA2263EACE0077DD4B /* PBXTargetDependency */,
+			);
+			name = "Zswift Watch";
+			productName = "Zswift Watch";
+			productReference = 1932AECB2263EACB0077DD4B /* Zswift Watch.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		1932AED62263EACE0077DD4B /* Zswift Watch Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1932AEEA2263EACF0077DD4B /* Build configuration list for PBXNativeTarget "Zswift Watch Extension" */;
+			buildPhases = (
+				1932AED32263EACE0077DD4B /* Sources */,
+				1932AED42263EACE0077DD4B /* Frameworks */,
+				1932AED52263EACE0077DD4B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Zswift Watch Extension";
+			productName = "Zswift Watch Extension";
+			productReference = 1932AED72263EACE0077DD4B /* Zswift Watch Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
+		};
 		19D5609D223D6D8600535544 /* Zswift */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 19D560B0223D6D8800535544 /* Build configuration list for PBXNativeTarget "Zswift" */;
@@ -110,10 +249,12 @@
 				19D5609A223D6D8600535544 /* Sources */,
 				19D5609B223D6D8600535544 /* Frameworks */,
 				19D5609C223D6D8600535544 /* Resources */,
+				1932AEED2263EACF0077DD4B /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				1932AEE42263EACE0077DD4B /* PBXTargetDependency */,
 			);
 			name = Zswift;
 			productName = Zswift;
@@ -126,13 +267,35 @@
 		19D56096223D6D8600535544 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1010;
+				LastSwiftUpdateCheck = 1020;
 				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = "Hung Truong";
 				TargetAttributes = {
+					1932AECA2263EACB0077DD4B = {
+						CreatedOnToolsVersion = 10.2;
+					};
+					1932AED62263EACE0077DD4B = {
+						CreatedOnToolsVersion = 10.2;
+						SystemCapabilities = {
+							com.apple.BackgroundModes.watchos.extension = {
+								enabled = 1;
+							};
+							com.apple.HealthKit.watchos = {
+								enabled = 1;
+							};
+						};
+					};
 					19D5609D223D6D8600535544 = {
 						CreatedOnToolsVersion = 10.1;
 						LastSwiftMigration = 1020;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.HealthKit = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -150,11 +313,30 @@
 			projectRoot = "";
 			targets = (
 				19D5609D223D6D8600535544 /* Zswift */,
+				1932AECA2263EACB0077DD4B /* Zswift Watch */,
+				1932AED62263EACE0077DD4B /* Zswift Watch Extension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		1932AEC92263EACB0077DD4B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1932AED12263EACE0077DD4B /* Assets.xcassets in Resources */,
+				1932AECF2263EACB0077DD4B /* Interface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1932AED52263EACE0077DD4B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1932AEE12263EACE0077DD4B /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		19D5609C223D6D8600535544 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -169,12 +351,22 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		1932AED32263EACE0077DD4B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1932AEDF2263EACE0077DD4B /* ExtensionDelegate.swift in Sources */,
+				1932AEDD2263EACE0077DD4B /* InterfaceController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		19D5609A223D6D8600535544 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				190790F72247287700A48980 /* PM5BluetoothService.swift in Sources */,
 				195D95CD2258811000176DB2 /* ZWOParser.swift in Sources */,
+				1932AEF22263F0430077DD4B /* HealthKit.swift in Sources */,
 				19D560A4223D6D8600535544 /* WorkoutViewController.swift in Sources */,
 				195D95E5225941AF00176DB2 /* WorkoutTableViewCell.swift in Sources */,
 				19C12254225ADC9A00887014 /* WorkoutView.swift in Sources */,
@@ -187,7 +379,28 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		1932AEDA2263EACE0077DD4B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1932AED62263EACE0077DD4B /* Zswift Watch Extension */;
+			targetProxy = 1932AED92263EACE0077DD4B /* PBXContainerItemProxy */;
+		};
+		1932AEE42263EACE0077DD4B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1932AECA2263EACB0077DD4B /* Zswift Watch */;
+			targetProxy = 1932AEE32263EACE0077DD4B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
+		1932AECD2263EACB0077DD4B /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1932AECE2263EACB0077DD4B /* Base */,
+			);
+			name = Interface.storyboard;
+			sourceTree = "<group>";
+		};
 		19D560A5223D6D8600535544 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -207,6 +420,90 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		1932AEE62263EACE0077DD4B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 23T6468TV6;
+				IBSC_MODULE = Zswift_Watch_Extension;
+				INFOPLIST_FILE = "Zswift Watch/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.hung-truong.Zswift.watchkitapp";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 5.2;
+			};
+			name = Debug;
+		};
+		1932AEE72263EACE0077DD4B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 23T6468TV6;
+				IBSC_MODULE = Zswift_Watch_Extension;
+				INFOPLIST_FILE = "Zswift Watch/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.hung-truong.Zswift.watchkitapp";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 5.2;
+			};
+			name = Release;
+		};
+		1932AEE82263EACF0077DD4B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_ENTITLEMENTS = "Zswift Watch Extension/Zswift Watch Extension.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 23T6468TV6;
+				INFOPLIST_FILE = "Zswift Watch Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.hung-truong.Zswift.watchkitapp.watchkitextension";
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 5.2;
+			};
+			name = Debug;
+		};
+		1932AEE92263EACF0077DD4B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_ENTITLEMENTS = "Zswift Watch Extension/Zswift Watch Extension.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 23T6468TV6;
+				INFOPLIST_FILE = "Zswift Watch Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.hung-truong.Zswift.watchkitapp.watchkitextension";
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 5.2;
+			};
+			name = Release;
+		};
 		19D560AE223D6D8800535544 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -327,6 +624,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Zswift/Zswift.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 23T6468TV6;
 				INFOPLIST_FILE = Zswift/Info.plist;
@@ -345,6 +643,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Zswift/Zswift.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 23T6468TV6;
 				INFOPLIST_FILE = Zswift/Info.plist;
@@ -362,6 +661,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		1932AEEA2263EACF0077DD4B /* Build configuration list for PBXNativeTarget "Zswift Watch Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1932AEE82263EACF0077DD4B /* Debug */,
+				1932AEE92263EACF0077DD4B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1932AEEC2263EACF0077DD4B /* Build configuration list for PBXNativeTarget "Zswift Watch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1932AEE62263EACE0077DD4B /* Debug */,
+				1932AEE72263EACE0077DD4B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		19D56099223D6D8600535544 /* Build configuration list for PBXProject "Zswift" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
