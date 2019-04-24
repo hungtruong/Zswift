@@ -70,8 +70,8 @@ class WorkoutViewController: UIViewController {
     }
     
     func checkService() {
-//        let currentWatts = self.bluetoothService.wattValue
-        let currentWatts = 50
+        let currentWatts = self.bluetoothService.wattValue
+//        let currentWatts = 50
         if currentWatts < 30 {
             self.targetWattsLabel.text = "0"
             // workout hasn't started or i stopped pedaling
