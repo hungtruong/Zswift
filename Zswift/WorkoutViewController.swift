@@ -21,6 +21,7 @@ class WorkoutViewController: UIViewController {
     var workout: Workout! {
         didSet {
             workout.ftp = ftp
+            workout.delegate = self
         }
     }
     
@@ -45,6 +46,7 @@ class WorkoutViewController: UIViewController {
     
     func setupWorkout() {
         workoutStart = Date()
+        workout.startTime = workoutStart
         let healthStore = HKHealthStore()
         let workoutConfiguration = HKWorkoutConfiguration()
         workoutConfiguration.activityType = .cycling
@@ -53,6 +55,7 @@ class WorkoutViewController: UIViewController {
         healthStore.startWatchApp(with: workoutConfiguration) { (success, error) in
             if success {
                 print("Success starting workout")
+                self.sendWorkoutMetadata()
             }
         }
     }
@@ -115,6 +118,12 @@ class WorkoutViewController: UIViewController {
         
         WCSession.default.sendMessage(message, replyHandler: nil, errorHandler: nil)
     }
+    
+    func sendWorkoutMetadata() {
+        let message: [String : Any] = ["workoutName": self.workout.name]
+        
+        WCSession.default.sendMessage(message, replyHandler: nil, errorHandler: nil)
+    }
 }
 
 extension WorkoutViewController: BluetoothServiceDelegate {
@@ -167,3 +176,16 @@ extension WorkoutViewController: WCSessionDelegate {
     }
 }
 
+extension WorkoutViewController: WorkoutDelegate {
+    func currentSegmentChanged(segment: WorkoutSegment) {
+        
+    }
+    
+    func saveSegment(segment: WorkoutSegment) {
+        guard let dateInterval = workout.dateInterval(for: segment) else { return }
+        let message: [String : Any] = ["dateInterval": dateInterval,
+                                       "segmentName": segment.description(ftp: ftp)]
+        
+        WCSession.default.sendMessage(message, replyHandler: nil, errorHandler: nil)
+    }
+}

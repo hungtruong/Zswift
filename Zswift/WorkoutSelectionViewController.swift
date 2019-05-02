@@ -34,6 +34,7 @@ extension WorkoutSelectionViewController: UITableViewDataSource, UITableViewDele
         let workout = self.workouts[indexPath.row]
         cell.nameLabel.text = workout.name
         cell.descriptionLabel.text = workout.workoutDescription
+        cell.setupWithWorkout(workout)
         return cell
     }
     

@@ -52,12 +52,13 @@ extension InterfaceController: WCSessionDelegate {
     
     func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
         if let _ = message["sendReminder"] {
-            [1, 2, 3, 4].forEach { count in
+            [1, 2, 3, 4, 5].forEach { count in
                 DispatchQueue.main.asyncAfter(deadline: .now() + count) {
                     self.playNotification()
                 }
             }
         }
+        
         if let calories = message["calories"] as? Int,
             let distance = message["distance"] as? Int,
             let start = message["start"] as? Date,
@@ -73,6 +74,22 @@ extension InterfaceController: WCSessionDelegate {
             
             self.workoutBuilder.add([caloriesBurned, distanceCycled]) { (_, _) in
                 self.endWorkout(date: end)
+            }
+        }
+        
+        if let segment = message["segmentName"] as? String,
+            let dateInterval = message["dateInterval"] as? DateInterval {
+            let workoutEvent = HKWorkoutEvent(type: .segment, dateInterval: dateInterval,
+                                              metadata: ["Segment Name" : segment])
+            self.workoutBuilder.addWorkoutEvents([workoutEvent]) { (success, error) in
+                print(success ? "Success saving segment" : error as Any)
+            }
+        }
+        
+        if let workoutName = message["workoutName"] as? String {
+            let metadata = [HKMetadataKeyWorkoutBrandName: workoutName]
+            self.workoutBuilder.addMetadata(metadata) { (success, error) in
+                print(success ? "Success saving metadata" : error as Any)
             }
         }
     }
@@ -138,14 +155,11 @@ extension InterfaceController: HKLiveWorkoutBuilderDelegate {
             
             switch quantityType {
             case HKQuantityType.quantityType(forIdentifier: .heartRate):
-                
-
                 guard let statistics = workoutBuilder.statistics(for: quantityType),
                     let value = statistics.mostRecentQuantity()?.doubleValue(for: heartRateUnit)
                     else {
                     break
                 }
-
                 self.updateHeartRate(Int(value))
             default:
                 break
