@@ -1,19 +1,33 @@
 import Foundation
+import UIKit
+
+protocol WorkoutDelegate {
+    func currentSegmentChanged(segment: WorkoutSegment)
+}
 
 struct Workout {
+    var delegate: WorkoutDelegate?
+    
     let name: String
     let workoutDescription: String
     let workoutSegments: [WorkoutSegment]
     var ftp: Int
     
-    var currentSegment: WorkoutSegment
+    var currentSegment: WorkoutSegment {
+        didSet {
+            delegate?.currentSegmentChanged(segment: currentSegment)
+        }
+    }
+    
     var currentWattage: Int = 0
     var totalTime: TimeInterval = 0
     var timeElapsed: TimeInterval = 0
     var timeRemaining: TimeInterval = 0
     var timeInSegment: TimeInterval = 0
+    var timeLeftInSegment: TimeInterval = 0
     var timeRemainingInSegment: TimeInterval = 0
-    
+    var startTime: Date?
+
     init(name: String, workoutDescription: String, workoutSegments: [WorkoutSegment], ftp: Int,
          currentSegment: WorkoutSegment? = nil) {
         self.name = name
@@ -33,6 +47,13 @@ struct Workout {
 }
 
 enum WorkoutSegment: Equatable {
+    static var dateFormatter = DateComponentsFormatter() {
+        didSet {
+            dateFormatter.zeroFormattingBehavior = [.pad]
+            dateFormatter.allowedUnits = [.minute, .second]
+        }
+    }
+
     case warmup(duration: TimeInterval, powerLow: Double, powerHigh: Double)
     case intervals(reps: Int, onDuration: TimeInterval, offDuration: TimeInterval, onPower: Double,
         offPower: Double)
@@ -42,13 +63,13 @@ enum WorkoutSegment: Equatable {
     var duration: TimeInterval {
         switch self {
         case .warmup(duration: let duration, powerLow: _, powerHigh: _):
-            return duration
+            return duration.rounded()
         case .steady(duration: let duration, power: _):
-            return duration
+            return duration.rounded()
         case .intervals(reps: _, onDuration: _, offDuration: _, onPower: _, offPower: _):
             return 0
         case .cooldown(duration: let duration, powerLow: _, powerHigh: _):
-            return duration
+            return duration.rounded()
         }
     }
     
@@ -96,11 +117,40 @@ enum WorkoutSegment: Equatable {
         case .warmup(duration: _, powerLow: _, powerHigh: _):
             return "Warmup"
         case .steady(duration: _, power: _):
-            return "Steady" + String(format: " @%@w", wattageString)
+            return "Steady" + String(format: " @%@w %@m", wattageString, WorkoutSegment.dateFormatter.string(from: self.duration)!)
         case .intervals(reps: _, onDuration: _, offDuration: _, onPower: _, offPower: _):
             return ""
         case .cooldown(duration: _, powerLow: _, powerHigh: _):
             return "Cooldown"
+        }
+    }
+    
+    func highPower() -> Double {
+        switch self {
+        case .warmup(duration: _, powerLow: let powerLow, powerHigh: _):
+            return powerLow
+        case .steady(duration: _, power: let power):
+            return power
+        case .intervals(reps: _, onDuration: _, offDuration: _, onPower: _, offPower: _):
+            return 0.0
+        case .cooldown(duration: _, powerLow: _, powerHigh: let powerHigh):
+            return powerHigh
+        }    }
+    
+    func color() -> UIColor {
+        switch self.highPower() {
+        case let p where p <= 0.6 :
+            return .gray
+        case let p where p < 0.76:
+            return .blue
+        case let p where p < 0.90:
+            return .green
+        case let p where p < 1.05:
+            return .yellow
+        case let p where p < 1.19:
+            return .orange
+        default:
+            return .red
         }
     }
 }
@@ -128,4 +178,30 @@ extension Workout {
         let index = self.workoutSegments.firstIndex(of: self.currentSegment)! + 1
         return index < workoutSegments.count ? workoutSegments[index] : nil
     }
+    
+    func maximumPower() -> Double {
+        return workoutSegments.map{ $0.highPower() }.max()!
+    }
+    
+    func dateInterval(for segment: WorkoutSegment) -> DateInterval? {
+        guard var startTime = startTime else { return nil }
+        for segment in workoutSegments {
+            if segment == segment {
+                return DateInterval(start: startTime, duration: segment.duration)
+            } else {
+                // add segment time to start time
+                startTime.addTimeInterval(segment.duration)
+            }
+        }
+        return nil
+    }
 }
+
+/*
+0-60% is zone 1
+61-75 is zone 2
+76-89 is zone 3
+ 89-104 zone 4
+ 105-118 zone 5
+ 119+ zone 6
+*/

@@ -1,0 +1,19 @@
+<workout_file>
+    <author>H.Truong</author>
+    <name>30 min Interval</name>
+    <description>it's a 30 minutes interval workout</description>
+    <sportType>bike</sportType>
+    <tags>
+        <tag name="INTERVALS"/>
+    </tags>
+    <workout>
+        <Warmup Duration="420.00003" PowerLow="0.25288463" PowerHigh="0.77211535" pace="1"/>
+        <SteadyState Duration="120.00001" Power="0.95160252" pace="1"/>
+        <SteadyState Duration="60.000004" Power="0.50288457" pace="1"/>
+        <SteadyState Duration="120.00001" Power="0.95160252" pace="1"/>
+        <SteadyState Duration="120.00001" Power="0.50288457" pace="1"/>
+        <SteadyState Duration="540" Power="0.81057692" pace="1"/>
+        <SteadyState Duration="120.00001" Power="0.50288457" pace="1"/>
+        <Cooldown Duration="300" PowerLow="0.75288463" PowerHigh="0.25288466" pace="1"/>
+    </workout>
+</workout_file>
