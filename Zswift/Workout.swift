@@ -12,10 +12,13 @@ struct Workout {
     let workoutDescription: String
     let workoutSegments: [WorkoutSegment]
     var ftp: Int
+    let uuid = UUID()
     
-    var currentSegment: WorkoutSegment {
+    var currentSegment: WorkoutSegment? = nil {
         didSet {
-            delegate?.currentSegmentChanged(segment: currentSegment)
+            if oldValue != currentSegment {
+                delegate?.currentSegmentChanged(segment: currentSegment!)
+            }
         }
     }
     
@@ -175,7 +178,7 @@ extension Workout {
     }
     
     func nextSegment() -> WorkoutSegment? {
-        let index = self.workoutSegments.firstIndex(of: self.currentSegment)! + 1
+        let index = self.workoutSegments.firstIndex(of: self.currentSegment!)! + 1
         return index < workoutSegments.count ? workoutSegments[index] : nil
     }
     

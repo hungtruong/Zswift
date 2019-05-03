@@ -18,6 +18,8 @@ class WorkoutViewController: UIViewController {
     private var workoutStart: Date!
     private var workoutEnd: Date!
     
+    private var workoutTimer: Timer!
+    
     var workout: Workout! {
         didSet {
             workout.ftp = ftp
@@ -37,11 +39,11 @@ class WorkoutViewController: UIViewController {
         dateFormatter.zeroFormattingBehavior = [.pad]
         dateFormatter.allowedUnits = [.minute, .second]
 
-        let timer = Timer(timeInterval: 1.0, repeats: true) { _ in
+        self.workoutTimer = Timer(timeInterval: 1.0, repeats: true) { _ in
             self.checkService()
         }
         
-        RunLoop.current.add(timer, forMode: .default)
+        RunLoop.current.add(workoutTimer, forMode: .default)
     }
     
     func setupWorkout() {
@@ -68,13 +70,14 @@ class WorkoutViewController: UIViewController {
     func endWorkout() {
         self.workoutEnd = Date()
         sendWorkoutSamples()
+        self.workoutTimer.invalidate()
 
         self.presentingViewController?.dismiss(animated: true, completion: nil)
     }
     
     func checkService() {
-        let currentWatts = self.bluetoothService.wattValue
-//        let currentWatts = 50
+//        let currentWatts = self.bluetoothService.wattValue
+        let currentWatts = 50
         if currentWatts < 30 {
             self.targetWattsLabel.text = "0"
             // workout hasn't started or i stopped pedaling
@@ -89,13 +92,17 @@ class WorkoutViewController: UIViewController {
                 return
             }
             
+            guard let currentSegment = workout.currentSegment else {
+                return
+            }
+            
             workout.recalculate(for: workout.timeElapsed)
             wattValueChanged(currentWatts)
             self.elapsedTimeLabel.text = String(format: "%@ / %@", dateFormatter.string(from: workout.timeElapsed)!,
                                                 dateFormatter.string(from: workout.totalTime)!)
             self.segmentTimeLabel.text = String(format: "%@ / %@", dateFormatter.string(from: workout.timeRemainingInSegment)!,
-                                                dateFormatter.string(from: workout.currentSegment.duration)!)
-            self.segmentLabel.text = String(format: "%@", workout.currentSegment.description(ftp: workout.ftp))
+                                                dateFormatter.string(from: currentSegment.duration)!)
+            self.segmentLabel.text = String(format: "%@", currentSegment.description(ftp: workout.ftp))
             if let nextSegment = workout.nextSegment() {
                 self.nextSegmentLabel.text = String(format: "Next: %@", nextSegment.description(ftp: workout.ftp))
             } else {
@@ -178,14 +185,19 @@ extension WorkoutViewController: WCSessionDelegate {
 
 extension WorkoutViewController: WorkoutDelegate {
     func currentSegmentChanged(segment: WorkoutSegment) {
-        
+        self.saveSegment(segment: segment)
     }
     
     func saveSegment(segment: WorkoutSegment) {
         guard let dateInterval = workout.dateInterval(for: segment) else { return }
-        let message: [String : Any] = ["dateInterval": dateInterval,
+        let start = dateInterval.start
+        let end = dateInterval.end
+        let message: [String : Any] = ["start": start,
+                                       "end": end,
                                        "segmentName": segment.description(ftp: ftp)]
         
-        WCSession.default.sendMessage(message, replyHandler: nil, errorHandler: nil)
+        WCSession.default.sendMessage(message, replyHandler: nil) { error in
+            print(error.localizedDescription)
+        }
     }
 }

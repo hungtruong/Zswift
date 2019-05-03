@@ -78,7 +78,8 @@ extension InterfaceController: WCSessionDelegate {
         }
         
         if let segment = message["segmentName"] as? String,
-            let dateInterval = message["dateInterval"] as? DateInterval {
+            let start = message["start"] as? Date, let end = message["end"] as? Date {
+            let dateInterval = DateInterval(start: start, end: end)
             let workoutEvent = HKWorkoutEvent(type: .segment, dateInterval: dateInterval,
                                               metadata: ["Segment Name" : segment])
             self.workoutBuilder.addWorkoutEvents([workoutEvent]) { (success, error) in

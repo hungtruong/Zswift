@@ -1,0 +1,12 @@
+<workout_file>
+    <author>H.Truong</author>
+    <name>Super Short</name>
+    <description>For testing</description>
+    <sportType>bike</sportType>
+    <tags/>
+    <workout>
+        <Warmup Duration="10" PowerLow="0.2528125" PowerHigh="0.7528125" pace="0"/>
+        <SteadyState Duration="20" Power="0.65281248" pace="0"/>
+        <SteadyState Duration="10" Power="0.80906248" pace="0"/>
+    </workout>
+</workout_file>
