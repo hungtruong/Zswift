@@ -64,7 +64,7 @@ class WorkoutView: UIView {
     func updateProgress(_ progress: Float) {
         if self.progressView == nil {
             let progressView = UIView()
-            progressView.backgroundColor = .black
+            progressView.backgroundColor = .label
             progressView.translatesAutoresizingMaskIntoConstraints = false
             self.addSubview(progressView)
             let trailingConstraint =
