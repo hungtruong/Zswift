@@ -22,6 +22,8 @@ struct Workout {
         }
     }
     
+    private var currentSegmentIndex = 0
+    
     var currentWattage: Int = 0
     var totalTime: TimeInterval = 0
     var timeElapsed: TimeInterval = 0
@@ -163,13 +165,14 @@ extension Workout {
         var tempElapsedTime = interval
         timeElapsed = tempElapsedTime
         timeRemaining = totalTime - tempElapsedTime
-        for segment in workoutSegments {
+        for (index, segment) in workoutSegments.enumerated() {
             if tempElapsedTime - segment.duration > 0 {
                 tempElapsedTime = tempElapsedTime - segment.duration
             } else {
                 // at this point, tempElapsedTime is the time offset into the segment
                 timeInSegment = tempElapsedTime
                 currentSegment = segment
+                currentSegmentIndex = index
                 timeRemainingInSegment = segment.duration - timeInSegment
                 currentWattage = segment.wattage(for: ftp, interval: timeInSegment)
                 break
@@ -178,7 +181,7 @@ extension Workout {
     }
     
     func nextSegment() -> WorkoutSegment? {
-        let index = self.workoutSegments.firstIndex(of: self.currentSegment!)! + 1
+        let index = currentSegmentIndex + 1
         return index < workoutSegments.count ? workoutSegments[index] : nil
     }
     
@@ -188,12 +191,12 @@ extension Workout {
     
     func dateInterval(for segment: WorkoutSegment) -> DateInterval? {
         guard var startTime = startTime else { return nil }
-        for segment in workoutSegments {
-            if segment == segment {
+        for workoutSegment in workoutSegments {
+            if segment == workoutSegment {
                 return DateInterval(start: startTime, duration: segment.duration)
             } else {
                 // add segment time to start time
-                startTime.addTimeInterval(segment.duration)
+                startTime.addTimeInterval(workoutSegment.duration)
             }
         }
         return nil

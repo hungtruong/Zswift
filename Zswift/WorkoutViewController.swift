@@ -15,6 +15,8 @@ class WorkoutViewController: UIViewController {
     
     @IBOutlet var heartRateLabel: UILabel!
     
+    @IBOutlet var workoutView: WorkoutView!
+    
     private var workoutStart: Date!
     private var workoutEnd: Date!
     
@@ -38,11 +40,19 @@ class WorkoutViewController: UIViewController {
         startWatch()
         dateFormatter.zeroFormattingBehavior = [.pad]
         dateFormatter.allowedUnits = [.minute, .second]
-
-        self.workoutTimer = Timer(timeInterval: 1.0, repeats: true) { _ in
+        
+        #if targetEnvironment(simulator)
+        let timeInterval = 0.1
+        #else
+        let timeInterval = 1.0
+        #endif
+        
+        self.workoutTimer = Timer(timeInterval: timeInterval, repeats: true) { _ in
             self.checkService()
         }
         
+        self.workoutView.setupWorkout(self.workout)
+
         RunLoop.current.add(workoutTimer, forMode: .default)
     }
     
@@ -76,8 +86,12 @@ class WorkoutViewController: UIViewController {
     }
     
     func checkService() {
-//        let currentWatts = self.bluetoothService.wattValue
+        #if targetEnvironment(simulator)
         let currentWatts = 50
+        #else
+        let currentWatts = self.bluetoothService.wattValue
+        #endif
+        
         if currentWatts < 30 {
             self.targetWattsLabel.text = "0"
             // workout hasn't started or i stopped pedaling
@@ -97,6 +111,7 @@ class WorkoutViewController: UIViewController {
             }
             
             workout.recalculate(for: workout.timeElapsed)
+            workoutView.updateProgress(Float(workout.timeElapsed / workout.totalTime))
             wattValueChanged(currentWatts)
             self.elapsedTimeLabel.text = String(format: "%@ / %@", dateFormatter.string(from: workout.timeElapsed)!,
                                                 dateFormatter.string(from: workout.totalTime)!)

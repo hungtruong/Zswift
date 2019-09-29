@@ -85,6 +85,15 @@ extension InterfaceController: WCSessionDelegate {
             self.workoutBuilder.addWorkoutEvents([workoutEvent]) { (success, error) in
                 print(success ? "Success saving segment" : error as Any)
             }
+            
+            //phony calories stuff
+            let calorieQuantityType = HKQuantityType.quantityType(forIdentifier: .activeEnergyBurned)!
+            let calorieQuantity = HKQuantity(unit: .kilocalorie(), doubleValue: 10.0)
+            let caloriesBurned = HKQuantitySample(type: calorieQuantityType, quantity: calorieQuantity, start: start, end: end)
+            self.workoutBuilder.add([caloriesBurned]) { (success, error) in
+                print(success ? "Success saving calories" : error as Any)
+            }
+            
         }
         
         if let workoutName = message["workoutName"] as? String {
