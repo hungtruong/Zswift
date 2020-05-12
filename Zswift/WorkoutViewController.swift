@@ -36,6 +36,7 @@ class WorkoutViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.isModalInPresentation = true
         self.bluetoothService.delegate = self
         startWatch()
         dateFormatter.zeroFormattingBehavior = [.pad]
@@ -73,8 +74,17 @@ class WorkoutViewController: UIViewController {
     }
     
     @IBAction func cancelWorkout() {
-        self.workoutEnd = Date()
-        self.endWorkout()
+        let alert = UIAlertController(title: "Yeah?", message: "Are you totally sure?", preferredStyle: .alert)
+        let cancelWorkoutAction = UIAlertAction(title: "Confirm", style: .destructive) { [weak self] _ in
+            self?.workoutEnd = Date()
+            self?.endWorkout()
+        }
+        
+        let nevermind = UIAlertAction(title: "Nevermind!", style: .cancel, handler: nil)
+        alert.addAction(cancelWorkoutAction)
+        alert.addAction(nevermind)
+        
+        self.present(alert, animated: true, completion: nil)
     }
     
     func endWorkout() {

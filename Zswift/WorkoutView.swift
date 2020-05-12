@@ -48,7 +48,7 @@ class WorkoutView: UIView {
             view.addSubview(barView)
             let heightMultiplier = workoutSegment.highPower() / workout.maximumPower()
 
-            barView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: CGFloat(heightMultiplier)).isActive = true
+            barView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: CGFloat(heightMultiplier), constant: -5).isActive = true
             stackView.addArrangedSubview(view)
             let multiplier = workoutSegment.duration / workout.totalTime
             view.widthAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: CGFloat(multiplier)).isActive = true
@@ -58,13 +58,17 @@ class WorkoutView: UIView {
             barView.bottomAnchor.constraint(equalTo: barView.superview!.bottomAnchor).isActive = true
             barView.leadingAnchor.constraint(equalTo: barView.superview!.leadingAnchor).isActive = true
             barView.trailingAnchor.constraint(equalTo: barView.superview!.trailingAnchor, constant: -1).isActive = true
+            
+            // Round corners
+            barView.layer.cornerRadius = 5
+            barView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         }
     }
     
     func updateProgress(_ progress: Float) {
         if self.progressView == nil {
             let progressView = UIView()
-            progressView.backgroundColor = .label
+            progressView.backgroundColor = .secondaryLabel
             progressView.translatesAutoresizingMaskIntoConstraints = false
             self.addSubview(progressView)
             let trailingConstraint =
