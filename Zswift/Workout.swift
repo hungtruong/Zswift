@@ -12,7 +12,7 @@ struct Workout {
     let workoutDescription: String
     let workoutSegments: [WorkoutSegment]
     var ftp: Int
-    let uuid = UUID()
+    let uuid = UUID() // for equatable
     
     var currentSegment: WorkoutSegment? = nil {
         didSet {

@@ -7,12 +7,20 @@
 //
 
 import UIKit
+import SwiftUI
 
 class WorkoutSelectionViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     let workouts = WorkoutManager.shared.workouts
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "ZSwift"
+        let settingsButton = UIBarButtonItem(image: UIImage(systemName: "gear"),
+                                             style: .plain,
+                                             target: self,
+                                             action: #selector(settingsButtonTapped))
+        settingsButton.tintColor = .darkGray
+        navigationItem.rightBarButtonItem = settingsButton
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -40,6 +48,12 @@ extension WorkoutSelectionViewController: UITableViewDataSource, UITableViewDele
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    @objc
+    func settingsButtonTapped() {
+        let view = UIHostingController(rootView: SettingsView())
+        self.navigationController?.pushViewController(view, animated: true)
     }
     
     

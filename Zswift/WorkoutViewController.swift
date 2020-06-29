@@ -29,7 +29,7 @@ class WorkoutViewController: UIViewController {
         }
     }
     
-    let ftp = 160
+    let ftp = UserDefaults.standard.integer(forKey: ftpKey)
     let dateFormatter = DateComponentsFormatter()
     
     let bluetoothService = PM5BluetoothService()

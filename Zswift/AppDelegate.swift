@@ -16,6 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        // Register default FTP for Hung
+        UserDefaults.standard.register(defaults: [ftpKey : 160])
         authorizeHealthKit { (success, error) in
             success ? print("Success") : print("Error")
         }
