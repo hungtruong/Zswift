@@ -14,13 +14,7 @@ struct Workout {
     var ftp: Int
     let uuid = UUID() // for equatable
     
-    var currentSegment: WorkoutSegment? = nil {
-        didSet {
-            if oldValue != currentSegment {
-                delegate?.currentSegmentChanged(segment: currentSegment!)
-            }
-        }
-    }
+    var currentSegment: WorkoutSegment? = nil
     
     private var currentSegmentIndex = 0
     

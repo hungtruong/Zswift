@@ -119,8 +119,13 @@ class WorkoutViewController: UIViewController {
             guard let currentSegment = workout.currentSegment else {
                 return
             }
-            
             workout.recalculate(for: workout.timeElapsed)
+            
+            // tell delegate that segment changed
+            if workout.currentSegment != currentSegment {
+                currentSegmentChanged(segment: currentSegment)
+            }
+            
             workoutView.updateProgress(Float(workout.timeElapsed / workout.totalTime))
             wattValueChanged(currentWatts)
             self.elapsedTimeLabel.text = String(format: "%@ / %@", dateFormatter.string(from: workout.timeElapsed)!,
