@@ -72,10 +72,12 @@ class PM5BluetoothService: NSObject, CBCentralManagerDelegate, CBPeripheralDeleg
     
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         print("disconnected")
+        self.scan()
     }
     
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
         print("failed to connect")
+        self.scan()
     }
     
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
