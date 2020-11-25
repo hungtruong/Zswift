@@ -3,6 +3,7 @@ import UIKit
 import WatchConnectivity
 
 class WorkoutViewController: UIViewController {
+    private let healthStore = HKHealthStore()
     @IBOutlet weak var targetWattsLabel: UILabel!
     @IBOutlet weak var segmentTimeLabel: UILabel!
     @IBOutlet weak var elapsedTimeLabel: UILabel!
@@ -60,12 +61,12 @@ class WorkoutViewController: UIViewController {
     func setupWorkout() {
         workoutStart = Date()
         workout.startTime = workoutStart
-        let healthStore = HKHealthStore()
+
         let workoutConfiguration = HKWorkoutConfiguration()
         workoutConfiguration.activityType = .cycling
         workoutConfiguration.locationType = .indoor
         
-        healthStore.startWatchApp(with: workoutConfiguration) { (success, error) in
+        self.healthStore.startWatchApp(with: workoutConfiguration) { (success, error) in
             if success {
                 print("Success starting workout")
                 self.sendWorkoutMetadata()
@@ -193,7 +194,7 @@ extension WorkoutViewController: WCSessionDelegate {
     }
     
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
-        print("Session Completed")
+        print("Session Activated")
     }
     
     func sessionDidBecomeInactive(_ session: WCSession) {

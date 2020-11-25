@@ -23,7 +23,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
     }
 
     func handle(_ workoutConfiguration: HKWorkoutConfiguration) {
-        if let interfaceController = WKExtension.shared().visibleInterfaceController as? InterfaceController {
+        if let interfaceController = WKExtension.shared().rootInterfaceController as? InterfaceController {
             interfaceController.handle(workoutConfiguration)
         }
     }

@@ -21,6 +21,8 @@ class InterfaceController: WKInterfaceController {
         let session = WCSession.default
         session.delegate = self
         session.activate()
+        
+        WKExtension.shared().isFrontmostTimeoutExtended = true
     }
     
     override func willActivate() {
@@ -107,16 +109,19 @@ extension InterfaceController: WCSessionDelegate {
 
 extension InterfaceController: HKWorkoutSessionDelegate {
     func handle(_ workoutConfiguration: HKWorkoutConfiguration) {
-        if let session = try? HKWorkoutSession(healthStore: healthStore, configuration: workoutConfiguration) {
+        let unrelatedWorkoutConfiguration = HKWorkoutConfiguration()
+        unrelatedWorkoutConfiguration.activityType = .cycling
+        unrelatedWorkoutConfiguration.locationType = .indoor
+        if let session = try? HKWorkoutSession(healthStore: healthStore, configuration: unrelatedWorkoutConfiguration) {
             self.workoutSession = session
             self.workoutBuilder = workoutSession.associatedWorkoutBuilder()
             self.workoutBuilder.dataSource =
                 HKLiveWorkoutDataSource(healthStore: healthStore,
-                                        workoutConfiguration: workoutConfiguration)
+                                        workoutConfiguration: unrelatedWorkoutConfiguration)
             self.workoutSession.delegate = self
             self.workoutBuilder.delegate = self
-            self.workoutBuilder.beginCollection(withStart: Date()) { (_, _) in }
             session.startActivity(with: Date())
+            self.workoutBuilder.beginCollection(withStart: Date()) { (_, _) in }
             startWorkout(date: Date())
         }
     }
@@ -176,6 +181,4 @@ extension InterfaceController: HKLiveWorkoutBuilderDelegate {
             }
         }
     }
-    
-    
 }
