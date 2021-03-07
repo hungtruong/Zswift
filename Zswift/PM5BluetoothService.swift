@@ -1,41 +1,22 @@
+import Combine
 import CoreBluetooth
 
-protocol BluetoothServiceDelegate {
-    func wattValueChanged(_ watts: Int)
-    func distanceValueChanged(_ distance: Int)
-    func caloriesChanged(_ calories: Int)
-    func cadenceChanged(_ cadence: Int)
+protocol ZswiftBluetoothService {
+    var wattValueSubject: CurrentValueSubject<Int, Never> { get }
+    var metersTraveledSubject: CurrentValueSubject<Int, Never> { get }
+    var caloriesBurnedSubject: CurrentValueSubject<Int, Never> { get }
+    var cadenceValueSubject: CurrentValueSubject<Int, Never> { get }
 }
 
-class PM5BluetoothService: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
-    
+class PM5BluetoothService: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, ZswiftBluetoothService {
+    var wattValueSubject = CurrentValueSubject<Int, Never>(0)
+    var metersTraveledSubject = CurrentValueSubject<Int, Never>(0)
+    var caloriesBurnedSubject = CurrentValueSubject<Int, Never>(0)
+    var cadenceValueSubject = CurrentValueSubject<Int, Never>(0)
+
     let centralManager = CBCentralManager()
     var connectedPeripherals: [CBPeripheral] = []
-    var wattValue: Int = 0 {
-        didSet {
-            delegate?.wattValueChanged(wattValue)
-        }
-    }
-    
-    var distance: Int = 0 {
-        didSet {
-            delegate?.distanceValueChanged(distance)
-        }
-    }
-    
-    var calories: Int = 0 {
-        didSet {
-            delegate?.caloriesChanged(calories)
-        }
-    }
-    var cadence: Int = 0 {
-        didSet {
-            delegate?.cadenceChanged(cadence)
-        }
-    }
-    
-    var delegate: BluetoothServiceDelegate?
-    
+            
     let service = CBUUID(string: "CE060030-43E5-11E4-916C-0800200C9A66")
     
     let characteristic31 = CBUUID(string: "CE060031-43E5-11E4-916C-0800200C9A66")
@@ -126,17 +107,15 @@ class PM5BluetoothService: NSObject, CBCentralManagerDelegate, CBPeripheralDeleg
         let array = [UInt8](characteristic.value!)
         switch characteristic.uuid {
         case characteristic32:
-            self.cadence = Int(array[5])
-            print("cadence ", self.cadence)
+            self.cadenceValueSubject.send(Int(array[5]))
         case characteristic33:
-            self.calories = Int((UInt16(array[7]) << 8) | UInt16(array[6]))
-            print("calories ", self.calories)
+            self.caloriesBurnedSubject
+                .send(Int((UInt16(array[7]) << 8) | UInt16(array[6])))
         case characteristic31:
-            self.distance = Int((UInt32(array[5]) << 16 | UInt32(array[4]) << 8 | UInt32(array[3]))) / 10
-            print("distance ", self.distance)
-            print(array)
+            self.metersTraveledSubject
+                .send(Int((UInt32(array[5]) << 16 | UInt32(array[4]) << 8 | UInt32(array[3]))) / 10)
         case characteristic36:
-            self.wattValue = Int((UInt16(array[4]) << 8) | UInt16(array[3]))
+            self.wattValueSubject.send(Int((UInt16(array[4]) << 8) | UInt16(array[3])))
         default:
             break
         }

@@ -14,17 +14,39 @@ struct Workout {
     var ftp: Int
     let uuid = UUID() // for equatable
     
-    var currentSegment: WorkoutSegment? = nil
+    var currentSegment: WorkoutSegment? {
+        var tempElapsedTime = timeElapsed
+        for (_, segment) in workoutSegments.enumerated() {
+            if tempElapsedTime - segment.duration > 0 {
+                tempElapsedTime = tempElapsedTime - segment.duration
+            } else {
+                return segment
+            }
+        }
+        return nil
+    }
     
-    private var currentSegmentIndex = 0
+    private var currentSegmentIndex: Int {
+        workoutSegments.firstIndex(of: currentSegment!) ?? 0
+    }
     
-    var currentWattage: Int = 0
+    var currentTargetWattage: Int {
+        return currentSegment?.wattage(for: ftp, interval: timeInSegment) ?? 0
+    }
     var totalTime: TimeInterval = 0
     var timeElapsed: TimeInterval = 0
-    var timeRemaining: TimeInterval = 0
-    var timeInSegment: TimeInterval = 0
-    var timeLeftInSegment: TimeInterval = 0
-    var timeRemainingInSegment: TimeInterval = 0
+    var timeInSegment: TimeInterval {
+        var tempElapsedTime = timeElapsed
+        for (_, segment) in workoutSegments.enumerated() {
+            if tempElapsedTime - segment.duration > 0 {
+                tempElapsedTime = tempElapsedTime - segment.duration
+            } else {
+                continue
+            }
+        }
+        return tempElapsedTime
+    }
+    var timeRemainingInSegment: TimeInterval { (currentSegment?.duration ?? 0) - timeInSegment }
     var startTime: Date?
 
     init(name: String, workoutDescription: String, workoutSegments: [WorkoutSegment], ftp: Int,
@@ -37,8 +59,6 @@ struct Workout {
         
         self.workoutSegments =  Array(workoutSegmentsArrays.joined())
         self.ftp = ftp
-        self.currentSegment = workoutSegments.first!
-        self.currentWattage = 0
         self.totalTime = self.workoutSegments.reduce(0.0, { (total, segment) -> TimeInterval in
             return total + segment.duration
         })
@@ -155,25 +175,6 @@ enum WorkoutSegment: Equatable {
 }
 
 extension Workout {
-    mutating func recalculate(for interval: TimeInterval) {
-        var tempElapsedTime = interval
-        timeElapsed = tempElapsedTime
-        timeRemaining = totalTime - tempElapsedTime
-        for (index, segment) in workoutSegments.enumerated() {
-            if tempElapsedTime - segment.duration > 0 {
-                tempElapsedTime = tempElapsedTime - segment.duration
-            } else {
-                // at this point, tempElapsedTime is the time offset into the segment
-                timeInSegment = tempElapsedTime
-                currentSegment = segment
-                currentSegmentIndex = index
-                timeRemainingInSegment = segment.duration - timeInSegment
-                currentWattage = segment.wattage(for: ftp, interval: timeInSegment)
-                break
-            }
-        }
-    }
-    
     func nextSegment() -> WorkoutSegment? {
         let index = currentSegmentIndex + 1
         return index < workoutSegments.count ? workoutSegments[index] : nil

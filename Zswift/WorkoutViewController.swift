@@ -1,3 +1,4 @@
+import Combine
 import HealthKit
 import UIKit
 import WatchConnectivity
@@ -21,7 +22,8 @@ class WorkoutViewController: UIViewController {
     private var workoutStart: Date!
     private var workoutEnd: Date!
     
-    private var workoutTimer: Timer!
+    private var workoutTimer: Cancellable!
+    private var subscriptions = Set<AnyCancellable>()
     
     var workout: Workout! {
         didSet {
@@ -33,12 +35,15 @@ class WorkoutViewController: UIViewController {
     let ftp = UserDefaults.standard.integer(forKey: ftpKey)
     let dateFormatter = DateComponentsFormatter()
     
-    let bluetoothService = PM5BluetoothService()
+    #if targetEnvironment(simulator)
+    var bluetoothService: ZswiftBluetoothService = MockBluetoothService()
+    #else
+    var bluetoothService: ZswiftBluetoothService = PM5BluetoothService()
+    #endif
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.isModalInPresentation = true
-        self.bluetoothService.delegate = self
         startWatch()
         dateFormatter.zeroFormattingBehavior = [.pad]
         dateFormatter.allowedUnits = [.minute, .second]
@@ -49,13 +54,46 @@ class WorkoutViewController: UIViewController {
         let timeInterval = 1.0
         #endif
         
-        self.workoutTimer = Timer(timeInterval: timeInterval, repeats: true) { _ in
-            self.checkService()
-        }
-        
-        self.workoutView.setupWorkout(self.workout)
+        workoutTimer = Timer.publish(every: timeInterval, on: .main, in: .default)
+            .autoconnect()
+            .receive(on: RunLoop.main)
+            .sink(receiveValue: { _ in
+                self.checkService()
+            })
 
-        RunLoop.current.add(workoutTimer, forMode: .default)
+        self.workoutView.setupWorkout(self.workout)
+        setupSubscribers()
+    }
+    
+    func setupSubscribers() {
+        self.bluetoothService.wattValueSubject
+            .receive(on: RunLoop.main)
+            .sink { watts in
+                self.targetWattsLabel.text =
+                    String(format: "%i / %i", watts, self.workout.currentTargetWattage)
+            }
+            .store(in: &subscriptions)
+        
+        self.bluetoothService.metersTraveledSubject
+            .receive(on: RunLoop.main)
+            .sink { meters in
+                self.distanceLabel.text = String(format: "%.2f", Double(meters) * 0.00062137)
+            }
+            .store(in: &subscriptions)
+        
+        self.bluetoothService.cadenceValueSubject
+            .receive(on: RunLoop.main)
+            .sink { cadence in
+                self.cadenceLabel.text = String(cadence)
+            }
+            .store(in: &subscriptions)
+        
+        self.bluetoothService.caloriesBurnedSubject
+            .receive(on: RunLoop.main)
+            .sink { calories in
+                self.caloriesLabel.text = String(calories)
+            }
+            .store(in: &subscriptions)
     }
     
     func setupWorkout() {
@@ -91,17 +129,13 @@ class WorkoutViewController: UIViewController {
     func endWorkout() {
         self.workoutEnd = Date()
         sendWorkoutSamples()
-        self.workoutTimer.invalidate()
+        self.workoutTimer.cancel()
 
         self.presentingViewController?.dismiss(animated: true, completion: nil)
     }
     
     func checkService() {
-        #if targetEnvironment(simulator)
-        let currentWatts = 50
-        #else
-        let currentWatts = self.bluetoothService.wattValue
-        #endif
+        let currentWatts = self.bluetoothService.wattValueSubject.value
         
         if currentWatts < 30 {
             self.targetWattsLabel.text = "0"
@@ -111,7 +145,7 @@ class WorkoutViewController: UIViewController {
                 setupWorkout()
             }
             
-            guard workout.timeElapsed < workout.totalTime else {
+            guard workout.timeElapsed <= workout.totalTime else {
                 // end workout
                 self.endWorkout()
                 return
@@ -120,20 +154,19 @@ class WorkoutViewController: UIViewController {
             guard let currentSegment = workout.currentSegment else {
                 return
             }
-            workout.recalculate(for: workout.timeElapsed)
-            
+                        
             // tell delegate that segment changed
             if workout.currentSegment != currentSegment {
                 currentSegmentChanged(segment: currentSegment)
             }
             
             workoutView.updateProgress(Float(workout.timeElapsed / workout.totalTime))
-            wattValueChanged(currentWatts)
             self.elapsedTimeLabel.text = String(format: "%@ / %@", dateFormatter.string(from: workout.timeElapsed)!,
                                                 dateFormatter.string(from: workout.totalTime)!)
             self.segmentTimeLabel.text = String(format: "%@ / %@", dateFormatter.string(from: workout.timeRemainingInSegment)!,
                                                 dateFormatter.string(from: currentSegment.duration)!)
             self.segmentLabel.text = String(format: "%@", currentSegment.description(ftp: workout.ftp))
+            
             if let nextSegment = workout.nextSegment() {
                 self.nextSegmentLabel.text = String(format: "Next: %@", nextSegment.description(ftp: workout.ftp))
             } else {
@@ -149,8 +182,9 @@ class WorkoutViewController: UIViewController {
     }
     
     func sendWorkoutSamples() {
-        let message: [String : Any] = ["calories": self.bluetoothService.calories,
-                                       "distance": self.bluetoothService.distance,
+        let message: [String : Any] = ["calories": self.bluetoothService.caloriesBurnedSubject.value,
+                                       //TODO convert to miles
+                                       "distance": self.bluetoothService.metersTraveledSubject.value,
                                        "start": self.workoutStart!,
                                        "end": self.workoutEnd!]
         
@@ -162,26 +196,6 @@ class WorkoutViewController: UIViewController {
         
         WCSession.default.sendMessage(message, replyHandler: nil, errorHandler: nil)
     }
-}
-
-extension WorkoutViewController: BluetoothServiceDelegate {
-    func wattValueChanged(_ watts: Int) {
-        self.targetWattsLabel.text = String(format: "%i / %i", watts, workout.currentWattage)
-    }
-    
-    func distanceValueChanged(_ distance: Int) {
-        self.distanceLabel.text = String(format: "%.2f", Double(distance) * 0.00062137)
-    }
-    
-    func caloriesChanged(_ calories: Int) {
-        self.caloriesLabel.text = String(calories)
-    }
-    
-    func cadenceChanged(_ cadence: Int) {
-        self.cadenceLabel.text = String(cadence)
-    }
-    
-    
 }
 
 extension WorkoutViewController: WCSessionDelegate {
