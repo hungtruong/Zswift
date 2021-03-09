@@ -41,7 +41,7 @@ struct Workout {
             if tempElapsedTime - segment.duration > 0 {
                 tempElapsedTime = tempElapsedTime - segment.duration
             } else {
-                continue
+                break
             }
         }
         return tempElapsedTime
