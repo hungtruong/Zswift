@@ -1,53 +1,15 @@
 import Foundation
 import UIKit
+import Combine
 
-protocol WorkoutDelegate {
-    func currentSegmentChanged(segment: WorkoutSegment)
-}
-
-struct Workout {
-    var delegate: WorkoutDelegate?
+class Workout: ObservableObject, Identifiable {
+    var subscriptions = Set<AnyCancellable>()
     
     let name: String
     let workoutDescription: String
     let workoutSegments: [WorkoutSegment]
-    var ftp: Int
     let uuid = UUID() // for equatable
-    
-    var currentSegment: WorkoutSegment? {
-        var tempElapsedTime = timeElapsed
-        for (_, segment) in workoutSegments.enumerated() {
-            if tempElapsedTime - segment.duration > 0 {
-                tempElapsedTime = tempElapsedTime - segment.duration
-            } else {
-                return segment
-            }
-        }
-        return nil
-    }
-    
-    private var currentSegmentIndex: Int {
-        workoutSegments.firstIndex(of: currentSegment!) ?? 0
-    }
-    
-    var currentTargetWattage: Int {
-        return currentSegment?.wattage(for: ftp, interval: timeInSegment) ?? 0
-    }
-    var totalTime: TimeInterval = 0
-    var timeElapsed: TimeInterval = 0
-    var timeInSegment: TimeInterval {
-        var tempElapsedTime = timeElapsed
-        for (_, segment) in workoutSegments.enumerated() {
-            if tempElapsedTime - segment.duration > 0 {
-                tempElapsedTime = tempElapsedTime - segment.duration
-            } else {
-                break
-            }
-        }
-        return tempElapsedTime
-    }
-    var timeRemainingInSegment: TimeInterval { (currentSegment?.duration ?? 0) - timeInSegment }
-    var startTime: Date?
+    let totalTime: TimeInterval
 
     init(name: String, workoutDescription: String, workoutSegments: [WorkoutSegment], ftp: Int,
          currentSegment: WorkoutSegment? = nil) {
@@ -58,14 +20,15 @@ struct Workout {
         })
         
         self.workoutSegments =  Array(workoutSegmentsArrays.joined())
-        self.ftp = ftp
         self.totalTime = self.workoutSegments.reduce(0.0, { (total, segment) -> TimeInterval in
             return total + segment.duration
         })
+        
+
     }
 }
 
-enum WorkoutSegment: Equatable {
+enum WorkoutSegment: Equatable, Hashable {    
     static var dateFormatter = DateComponentsFormatter() {
         didSet {
             dateFormatter.zeroFormattingBehavior = [.pad]
@@ -136,7 +99,7 @@ enum WorkoutSegment: Equatable {
         case .warmup(duration: _, powerLow: _, powerHigh: _):
             return "Warmup"
         case .steady(duration: _, power: _):
-            return "Steady" + String(format: " @%@w %@m", wattageString, WorkoutSegment.dateFormatter.string(from: self.duration)!)
+            return "Steady" + String(format: " %@w %@m", wattageString, WorkoutSegment.dateFormatter.string(from: self.duration)!)
         case .intervals(reps: _, onDuration: _, offDuration: _, onPower: _, offPower: _):
             return ""
         case .cooldown(duration: _, powerLow: _, powerHigh: _):
@@ -154,55 +117,82 @@ enum WorkoutSegment: Equatable {
             return 0.0
         case .cooldown(duration: _, powerLow: _, powerHigh: let powerHigh):
             return powerHigh
-        }    }
+        }
+    }
+    
+    func startPower() -> Double {
+        switch self {
+        case let .warmup(_, powerLow, _):
+            return powerLow
+        case let .steady(_, power):
+            return power
+        case .intervals:
+            return 0.0
+        case let .cooldown(_, powerLow, _):
+            return powerLow
+        }
+    }
+    
+    func endPower() -> Double {
+        switch self {
+        case let .warmup(_, _, powerHigh):
+            return powerHigh
+        case let .steady(_, power):
+            return power
+        case .intervals:
+            return 0.0
+        case let .cooldown(_, _, powerHigh):
+            return powerHigh
+        }
+    }
     
     func color() -> UIColor {
         switch self.highPower() {
         case let p where p <= 0.6 :
-            return .gray
+            return UIColor(named: "Gray") ?? .black
         case let p where p < 0.76:
-            return .blue
+            return UIColor(named: "Blue") ?? .black
         case let p where p < 0.90:
-            return .green
+            return UIColor(named: "Green") ?? .black
         case let p where p < 1.05:
-            return .yellow
+            return UIColor(named: "Yellow") ?? .black
         case let p where p < 1.19:
-            return .orange
+            return UIColor(named: "Orange") ?? .black
         default:
-            return .red
+            return UIColor(named: "Red") ?? .black
         }
     }
 }
 
 extension Workout {
-    func nextSegment() -> WorkoutSegment? {
-        let index = currentSegmentIndex + 1
-        return index < workoutSegments.count ? workoutSegments[index] : nil
-    }
-    
     func maximumPower() -> Double {
         return workoutSegments.map{ $0.highPower() }.max()!
     }
+}
+
+extension Workout: Hashable, Equatable {
+    static func == (lhs: Workout, rhs: Workout) -> Bool {
+        lhs.uuid == rhs.uuid
+    }
     
-    func dateInterval(for segment: WorkoutSegment) -> DateInterval? {
-        guard var startTime = startTime else { return nil }
-        for workoutSegment in workoutSegments {
-            if segment == workoutSegment {
-                return DateInterval(start: startTime, duration: segment.duration)
-            } else {
-                // add segment time to start time
-                startTime.addTimeInterval(workoutSegment.duration)
-            }
-        }
-        return nil
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(uuid)
     }
 }
 
-/*
-0-60% is zone 1
-61-75 is zone 2
-76-89 is zone 3
- 89-104 zone 4
- 105-118 zone 5
- 119+ zone 6
-*/
+extension Workout {
+    static func mockWorkout() -> Workout {
+        let workoutSegments: [WorkoutSegment] = [
+            WorkoutSegment.warmup(duration: 420, powerLow: 0.25, powerHigh: 0.77),
+            WorkoutSegment.steady(duration: 120, power: 0.95),
+            WorkoutSegment.steady(duration: 60, power: 0.5),
+            WorkoutSegment.steady(duration: 120, power: 0.95),
+            WorkoutSegment.steady(duration: 120, power: 0.5),
+            WorkoutSegment.steady(duration: 540, power: 0.80),
+            WorkoutSegment.steady(duration: 120, power: 0.5),
+            WorkoutSegment.cooldown(duration: 300, powerLow: 0.75, powerHigh: 0.25)
+        ]
+        
+        return Workout(name: "Fake workout", workoutDescription: "This workout is just a test", workoutSegments: workoutSegments, ftp: 160)
+    }
+}

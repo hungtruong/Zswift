@@ -1,53 +1,58 @@
+//
+//  WorkoutHandler.swift
+//  Zswift Watch Extension
+//
+//  Created by Hung Truong on 4/17/21.
+//  Copyright © 2021 Hung Truong. All rights reserved.
+//
 import HealthKit
 import WatchKit
-import Foundation
 import WatchConnectivity
 
-class InterfaceController: WKInterfaceController {
-    @IBOutlet weak var heartRateLabel: WKInterfaceLabel!
+class WorkoutHandler: NSObject, ObservableObject {
+    static let shared = WorkoutHandler()
     let healthStore = HKHealthStore()
     var workoutSession: HKWorkoutSession!
     var workoutBuilder: HKLiveWorkoutBuilder!
     let heartRateQuantityType = HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.heartRate)!
     let heartRateUnit = HKUnit.count().unitDivided(by: HKUnit.minute())
     
-    override func awake(withContext context: Any?) {
-        super.awake(withContext: context)
-        
+    @Published var heartRate = "-"
+    @Published var workoutName = ""
+    
+    override private init()  {}
+    
+    @objc func playNotification() {
+        WKInterfaceDevice.current().play(.start)
+    }
+    
+    func endWorkout(date: Date) {
+        workoutSession.end()
+        workoutBuilder.endCollection(withEnd: date) { (success, error) in
+            self.workoutBuilder.finishWorkout { (workout, error) in }
+        }
+    }
+    
+    func sendHeartRate(_ heartRate: Int) {
         guard WCSession.isSupported() else {
             return
         }
         
         let session = WCSession.default
-        session.delegate = self
-        session.activate()
+        let message: [String : Any]  = ["heart_rate": heartRate]
         
-        WKExtension.shared().isFrontmostTimeoutExtended = true
-    }
-    
-    override func willActivate() {
-        // This method is called when watch view controller is about to be visible to user
-        super.willActivate()
-    }
-    
-    override func didDeactivate() {
-        // This method is called when watch view controller is no longer visible
-        super.didDeactivate()
+        session.sendMessage(message, replyHandler: nil, errorHandler: nil)
     }
     
     func updateHeartRate(_ heartRate: Int) {
         DispatchQueue.main.async {
-            self.heartRateLabel.setText(String(heartRate))
+            self.heartRate = String(heartRate)
             self.sendHeartRate(heartRate)
         }
     }
-    
-    @objc func playNotification() {
-        WKInterfaceDevice.current().play(.start)
-    }
 }
 
-extension InterfaceController: WCSessionDelegate {
+extension WorkoutHandler: WCSessionDelegate {
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
         print("Session on watch completed")
     }
@@ -99,6 +104,7 @@ extension InterfaceController: WCSessionDelegate {
         }
         
         if let workoutName = message["workoutName"] as? String {
+            self.workoutName = workoutName
             let metadata = [HKMetadataKeyWorkoutBrandName: workoutName]
             self.workoutBuilder.addMetadata(metadata) { (success, error) in
                 print(success ? "Success saving metadata" : error as Any)
@@ -107,7 +113,7 @@ extension InterfaceController: WCSessionDelegate {
     }
 }
 
-extension InterfaceController: HKWorkoutSessionDelegate {
+extension WorkoutHandler: HKWorkoutSessionDelegate {
     func handle(_ workoutConfiguration: HKWorkoutConfiguration) {
         let unrelatedWorkoutConfiguration = HKWorkoutConfiguration()
         unrelatedWorkoutConfiguration.activityType = .cycling
@@ -137,27 +143,9 @@ extension InterfaceController: HKWorkoutSessionDelegate {
     func startWorkout(date: Date) {
 
     }
-    
-    func endWorkout(date: Date) {
-        workoutSession.end()
-        workoutBuilder.endCollection(withEnd: date) { (success, error) in
-            self.workoutBuilder.finishWorkout { (workout, error) in }
-        }
-    }
-    
-    func sendHeartRate(_ heartRate: Int) {
-        guard WCSession.isSupported() else {
-            return
-        }
-        
-        let session = WCSession.default
-        let message: [String : Any]  = ["heart_rate": heartRate]
-        
-        session.sendMessage(message, replyHandler: nil, errorHandler: nil)
-    }
 }
 
-extension InterfaceController: HKLiveWorkoutBuilderDelegate {
+extension WorkoutHandler: HKLiveWorkoutBuilderDelegate {
     func workoutBuilderDidCollectEvent(_ workoutBuilder: HKLiveWorkoutBuilder) {
         
     }
