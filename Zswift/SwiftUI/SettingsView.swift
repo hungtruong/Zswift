@@ -2,21 +2,12 @@ import SwiftUI
 private let defaults = UserDefaults.standard
 let ftpKey = "userFTP"
 struct SettingsView: View {
-    @State private var ftp: Int =
-        defaults.integer(forKey: ftpKey)
+    @AppStorage(ftpKey) var ftp: Int = 160
     var body: some View {
         Form {
             Section(header: Text("Settings")) {
                 HStack {
-                    Stepper(onIncrement: {
-                        self.ftp += 5
-                        defaults.set(self.ftp, forKey: ftpKey)
-                    }, onDecrement: {
-                        self.ftp -= 5
-                        defaults.set(self.ftp, forKey: ftpKey)
-                    }) {
-                        Text("FTP")
-                    }
+                    Stepper("FTP", value: $ftp, in: 100...300, step: 5)
                     Spacer(minLength: 20)
                     Text("\(ftp)")
                 }

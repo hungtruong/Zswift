@@ -1,7 +1,7 @@
 import Foundation
 
-class WorkoutManager {
-    static let shared = WorkoutManager()
+class WorkoutLoader {
+    static let shared = WorkoutLoader()
     private(set) var workouts: [Workout] = []
     private init() {
         guard let urls = Bundle.main.urls(forResourcesWithExtension: "zwo", subdirectory: "Workouts") else {
@@ -23,6 +23,10 @@ class WorkoutManager {
             if let workout = zwoParser.workout() {
                 self.workouts.append(workout)
             }
+            
+            
+            self.workouts.sort { $0.name < $1.name }
+            self.workouts.move(fromOffsets: IndexSet(integer: 4), toOffset: 1)
         }
     }
 }
