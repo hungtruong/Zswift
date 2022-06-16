@@ -14,9 +14,11 @@ struct ContentView: View {
     var body: some View {
         TabView {
             VStack {
-                if workoutHandler.workoutName != "" {
-                    Text(workoutHandler.workoutName)
-                }
+//                if workoutHandler.workoutName != "" {
+//                    Text(workoutHandler.workoutName)
+//                        .bold()
+//                    Spacer()
+//                }
                 Text(workoutHandler.heartRate)
                     .font(.title)
                     .foregroundColor(.red)

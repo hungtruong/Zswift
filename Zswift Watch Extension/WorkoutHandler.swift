@@ -104,7 +104,9 @@ extension WorkoutHandler: WCSessionDelegate {
         }
         
         if let workoutName = message["workoutName"] as? String {
-            self.workoutName = workoutName
+            DispatchQueue.main.async {
+                self.workoutName = workoutName
+            }
             let metadata = [HKMetadataKeyWorkoutBrandName: workoutName]
             self.workoutBuilder.addMetadata(metadata) { (success, error) in
                 print(success ? "Success saving metadata" : error as Any)
@@ -115,15 +117,12 @@ extension WorkoutHandler: WCSessionDelegate {
 
 extension WorkoutHandler: HKWorkoutSessionDelegate {
     func handle(_ workoutConfiguration: HKWorkoutConfiguration) {
-        let unrelatedWorkoutConfiguration = HKWorkoutConfiguration()
-        unrelatedWorkoutConfiguration.activityType = .cycling
-        unrelatedWorkoutConfiguration.locationType = .indoor
-        if let session = try? HKWorkoutSession(healthStore: healthStore, configuration: unrelatedWorkoutConfiguration) {
+        if let session = try? HKWorkoutSession(healthStore: healthStore, configuration: workoutConfiguration) {
             self.workoutSession = session
             self.workoutBuilder = workoutSession.associatedWorkoutBuilder()
             self.workoutBuilder.dataSource =
                 HKLiveWorkoutDataSource(healthStore: healthStore,
-                                        workoutConfiguration: unrelatedWorkoutConfiguration)
+                                        workoutConfiguration: workoutConfiguration)
             self.workoutSession.delegate = self
             self.workoutBuilder.delegate = self
             session.startActivity(with: Date())
