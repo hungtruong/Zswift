@@ -45,7 +45,7 @@
 			remoteGlobalIDString = 193247E5262B41C000D1613C;
 			remoteInfo = "Zswift Watch Extension";
 		};
-		193247F7262B41C100D1613C /* PBXContainerItemProxy */ = {
+		19F4A056285AE315003EF32D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 19D56096223D6D8600535544 /* Project object */;
 			proxyType = 1;
@@ -308,7 +308,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				193247F8262B41C100D1613C /* PBXTargetDependency */,
+				19F4A057285AE315003EF32D /* PBXTargetDependency */,
 			);
 			name = Zswift;
 			productName = Zswift;
@@ -435,10 +435,10 @@
 			target = 193247E5262B41C000D1613C /* Zswift Watch Extension */;
 			targetProxy = 193247E8262B41C000D1613C /* PBXContainerItemProxy */;
 		};
-		193247F8262B41C100D1613C /* PBXTargetDependency */ = {
+		19F4A057285AE315003EF32D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 193247DC262B41BF00D1613C /* Zswift Watch */;
-			targetProxy = 193247F7262B41C100D1613C /* PBXContainerItemProxy */;
+			targetProxy = 19F4A056285AE315003EF32D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -459,9 +459,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_ENTITLEMENTS = "Zswift Watch Extension/Zswift Watch Extension.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Zswift Watch Extension/Preview Content\"";
-				DEVELOPMENT_TEAM = 23T6468TV6;
+				DEVELOPMENT_TEAM = 83TPS888ZW;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Zswift Watch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -469,8 +470,9 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.hung-truong.Zswift.watchkitapp.watchkitextension";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.hung-truong.Zswiftyy.watchkitapp.watchkitextension";
 				PRODUCT_NAME = "${TARGET_NAME}";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -484,9 +486,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_ENTITLEMENTS = "Zswift Watch Extension/Zswift Watch Extension.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Zswift Watch Extension/Preview Content\"";
-				DEVELOPMENT_TEAM = 23T6468TV6;
+				DEVELOPMENT_TEAM = 83TPS888ZW;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Zswift Watch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -494,8 +497,9 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.hung-truong.Zswift.watchkitapp.watchkitextension";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.hung-truong.Zswiftyy.watchkitapp.watchkitextension";
 				PRODUCT_NAME = "${TARGET_NAME}";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -510,12 +514,14 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 23T6468TV6;
+				DEVELOPMENT_TEAM = 83TPS888ZW;
 				IBSC_MODULE = Zswift_Watch_Extension;
 				INFOPLIST_FILE = "Zswift Watch/Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.hung-truong.Zswift.watchkitapp";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.hung-truong.Zswiftyy.watchkitapp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -530,12 +536,14 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 23T6468TV6;
+				DEVELOPMENT_TEAM = 83TPS888ZW;
 				IBSC_MODULE = Zswift_Watch_Extension;
 				INFOPLIST_FILE = "Zswift Watch/Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.hung-truong.Zswift.watchkitapp";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.hung-truong.Zswiftyy.watchkitapp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -667,16 +675,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Zswift/Zswift.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 23T6468TV6;
+				DEVELOPMENT_TEAM = 83TPS888ZW;
 				INFOPLIST_FILE = Zswift/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.hung-truong.Zswift";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.hung-truong.Zswiftyy";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -687,16 +697,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Zswift/Zswift.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 23T6468TV6;
+				DEVELOPMENT_TEAM = 83TPS888ZW;
 				INFOPLIST_FILE = Zswift/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.hung-truong.Zswift";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.hung-truong.Zswiftyy";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

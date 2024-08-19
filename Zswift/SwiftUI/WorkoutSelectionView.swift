@@ -14,7 +14,7 @@ struct WorkoutSelectionView: View {
     @State private var showingWorkoutDetail = false
     @State private var selectedWorkout: Workout?
     var body: some View {
-        List {
+        ScrollView {
             ForEach(workouts, id: \.self) { workout in
                 ZStack {
                     GroupBox(label:
@@ -29,7 +29,7 @@ struct WorkoutSelectionView: View {
                                         .font(.caption)
                                         .lineLimit(3)
                                     SwiftUIWorkoutView(workout: workout)
-                                        .frame(height: 80, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                                        .frame(height: 80, alignment: .center)
                                 }
                              })
                         .listRowInsets(EdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5))
@@ -37,12 +37,12 @@ struct WorkoutSelectionView: View {
                             selectedWorkout = workout
                         }
                 }
+                .padding(.horizontal, 16)
             }
             .fullScreenCover(item: $selectedWorkout) { workout in
                 SwiftUIWorkoutViewController(workoutManager: WorkoutManager(workout: workout))
             }
         }
-    
     }
 }
 
