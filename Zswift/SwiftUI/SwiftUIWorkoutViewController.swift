@@ -24,7 +24,7 @@ struct SwiftUIWorkoutViewController: View {
     }
     
     var body: some View {
-        if verticalSizeClass == .compact
+        if verticalSizeClass == .regular
         {
             VStack {
                 SwiftUIWorkoutView(workout: workoutManager.workout, workoutManager: workoutManager)
