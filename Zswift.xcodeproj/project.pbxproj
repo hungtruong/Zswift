@@ -470,7 +470,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.hung-truong.Zswiftyy.watchkitapp.watchkitextension";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.hung-truong.Zswift2.watchkitapp.watchkitextension";
 				PRODUCT_NAME = "${TARGET_NAME}";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = watchos;
@@ -497,7 +497,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.hung-truong.Zswiftyy.watchkitapp.watchkitextension";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.hung-truong.Zswift2.watchkitapp.watchkitextension";
 				PRODUCT_NAME = "${TARGET_NAME}";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = watchos;
@@ -519,7 +519,7 @@
 				DEVELOPMENT_TEAM = 83TPS888ZW;
 				IBSC_MODULE = Zswift_Watch_Extension;
 				INFOPLIST_FILE = "Zswift Watch/Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.hung-truong.Zswiftyy.watchkitapp";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.hung-truong.Zswift2.watchkitapp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = watchos;
@@ -541,7 +541,7 @@
 				DEVELOPMENT_TEAM = 83TPS888ZW;
 				IBSC_MODULE = Zswift_Watch_Extension;
 				INFOPLIST_FILE = "Zswift Watch/Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.hung-truong.Zswiftyy.watchkitapp";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.hung-truong.Zswift2.watchkitapp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = watchos;
@@ -684,7 +684,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.hung-truong.Zswiftyy";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.hung-truong.Zswift2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -706,7 +706,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.hung-truong.Zswiftyy";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.hung-truong.Zswift2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
